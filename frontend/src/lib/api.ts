@@ -83,6 +83,7 @@ export type BlogPostDetail = {
 };
 
 export type ContactMessagePayload = {
+  message_type: string;
   name: string;
   email: string;
   subject: string;
@@ -91,6 +92,7 @@ export type ContactMessagePayload = {
 
 export type ContactMessageResponse = {
   id: number;
+  message_type: string;
   name: string;
   email: string;
   subject: string;

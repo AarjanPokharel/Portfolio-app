@@ -2,12 +2,30 @@
 
 import { useState } from "react";
 import type { FormEvent } from "react";
+
 import { sendContactMessage } from "@/lib/api";
 
-export default function ContactForm() {
+type ContactFormProps = {
+  defaultMessageType?: string;
+  defaultSubject?: string;
+};
+
+const messageTypeOptions = [
+  { value: "general", label: "General Message" },
+  { value: "job_opportunity", label: "Job Opportunity" },
+  { value: "hire_me", label: "Hire Me Inquiry" },
+  { value: "freelance_project", label: "Freelance / Project Work" },
+  { value: "collaboration", label: "Collaboration" },
+];
+
+export default function ContactForm({
+  defaultMessageType = "general",
+  defaultSubject = "",
+}: ContactFormProps) {
+  const [messageType, setMessageType] = useState(defaultMessageType);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
+  const [subject, setSubject] = useState(defaultSubject);
   const [message, setMessage] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,6 +41,7 @@ export default function ContactForm() {
 
     try {
       await sendContactMessage({
+        message_type: messageType,
         name,
         email,
         subject,
@@ -30,9 +49,10 @@ export default function ContactForm() {
       });
 
       setSuccessMessage("Your message was sent successfully.");
+      setMessageType(defaultMessageType);
       setName("");
       setEmail("");
-      setSubject("");
+      setSubject(defaultSubject);
       setMessage("");
     } catch (error) {
       setErrorMessage(
@@ -49,8 +69,28 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
         <label className="mb-2 block text-sm font-medium text-slate-300">
+          Message Type
+        </label>
+
+        <select
+          required
+          value={messageType}
+          onChange={(event) => setMessageType(event.target.value)}
+          className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none focus:border-cyan-400"
+        >
+          {messageTypeOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label className="mb-2 block text-sm font-medium text-slate-300">
           Name
         </label>
+
         <input
           type="text"
           required
@@ -65,6 +105,7 @@ export default function ContactForm() {
         <label className="mb-2 block text-sm font-medium text-slate-300">
           Email
         </label>
+
         <input
           type="email"
           required
@@ -79,12 +120,13 @@ export default function ContactForm() {
         <label className="mb-2 block text-sm font-medium text-slate-300">
           Subject
         </label>
+
         <input
           type="text"
           value={subject}
           onChange={(event) => setSubject(event.target.value)}
           className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none focus:border-cyan-400"
-          placeholder="Internship opportunity, collaboration, question..."
+          placeholder="Internship opportunity, collaboration, project help..."
         />
       </div>
 
@@ -92,6 +134,7 @@ export default function ContactForm() {
         <label className="mb-2 block text-sm font-medium text-slate-300">
           Message
         </label>
+
         <textarea
           required
           value={message}
