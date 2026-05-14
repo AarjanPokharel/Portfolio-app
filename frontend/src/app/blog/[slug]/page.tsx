@@ -1,7 +1,7 @@
 // SLUG PAGE
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBlogPost } from "@/lib/api";
+import { formatDisplayDate, getBlogPost } from "@/lib/api";
 
 type BlogDetailPageProps = {
   params: Promise<{
@@ -50,7 +50,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
 
             {post.published_at && (
               <p className="mt-5 text-sm text-slate-500">
-                Published on {new Date(post.published_at).toLocaleDateString()}
+                Published on {formatDisplayDate(post.published_at)}
               </p>
             )}
 

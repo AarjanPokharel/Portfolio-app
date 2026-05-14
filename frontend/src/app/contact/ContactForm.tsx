@@ -51,7 +51,7 @@ export default function ContactForm({
         message,
       });
 
-      setSuccessMessage("Your message was sent successfully.");
+      setSuccessMessage("Thanks! Your message has been saved. I’ll review it and respond soon.");
       setMessageType(defaultMessageType);
       setName("");
       setEmail("");

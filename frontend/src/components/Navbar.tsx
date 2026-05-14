@@ -3,9 +3,7 @@ import Link from "next/link";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "#skills", label: "Skills" },
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#education", label: "Education" },
+  { href: "#about", label: "About Me" },
   { href: "#projects", label: "Projects" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
@@ -24,9 +22,7 @@ export default function Navbar() {
             <p className="text-sm font-bold tracking-wide text-white">
               Aarjan Pokharel
             </p>
-            <p className="hidden text-xs text-slate-500 sm:block">
-              
-            </p>
+
           </div>
         </Link>
 

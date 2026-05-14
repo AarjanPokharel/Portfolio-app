@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getBlogPosts } from "@/lib/api";
+import { formatDisplayDate, getBlogPosts } from "@/lib/api";
 
 export default async function BlogPage() {
   const blogPosts = await getBlogPosts();
@@ -61,7 +61,7 @@ export default async function BlogPage() {
 
               {post.published_at && (
                 <p className="mt-4 text-xs text-slate-500">
-                  {new Date(post.published_at).toLocaleDateString()}
+                  {formatDisplayDate(post.published_at)}
                 </p>
               )}
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import AnimatedHeroText from "@/components/AnimatedHeroText";
 import InfoSlider from "@/components/InfoSlider";
+import Footer from "@/components/Footer";
 import {
   formatDisplayDate,
   getBlogPosts,
@@ -143,6 +144,7 @@ export default async function Home() {
       </section>
 
       {/* TECH STACK */}
+    {displayedSkills.length > 0 && (
       <section id="skills" className="mx-auto max-w-7xl px-6">
         <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-6 shadow-xl shadow-slate-950/40">
           <p className="mb-5 text-center text-sm font-semibold uppercase tracking-widest text-slate-500">
@@ -161,12 +163,13 @@ export default async function Home() {
               ))
             ) : (
               <p className="text-sm text-slate-500">
-                Add skills from Django Admin.
+                Not yet added..
               </p>
             )}
           </div>
         </div>
       </section>
+    )}
 
       {/* ABOUT */}
       <section id="about" className="mx-auto max-w-7xl px-6 py-20">
@@ -180,7 +183,7 @@ export default async function Home() {
               />
             ) : (
               <div className="flex min-h-[280px] items-center justify-center text-slate-500">
-                Upload profile image from Django Admin
+                Not yet added..
               </div>
             )}
           </div>
@@ -245,6 +248,7 @@ export default async function Home() {
       />
  
       {/* PROJECTS */}
+    {displayedProjects.length > 0 && (
       <section id="projects" className="mx-auto max-w-7xl px-6 py-10">
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
@@ -321,12 +325,14 @@ export default async function Home() {
               </article>
             ))
           ) : (
-            <p className="text-slate-400">Add projects from Django Admin.</p>
+            <p className="text-slate-400">Not added yet..</p>
           )}
         </div>
       </section>
+    )}
 
       {/* RECENT BLOGS */}
+    {displayedBlogPosts.length > 0 && (
       <section className="mx-auto max-w-7xl px-6 py-20">
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
@@ -372,7 +378,11 @@ export default async function Home() {
                 <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-400">
                   {post.excerpt}
                 </p>
-
+                {post.published_at && (
+                  <p className="mt-4 text-xs text-slate-500">
+                    {formatDisplayDate(post.published_at)}
+                  </p>
+                )}
                 <Link
                   href={`/blog/${post.slug}`}
                   className="mt-5 inline-block text-sm font-semibold text-cyan-400 hover:text-cyan-300"
@@ -383,11 +393,12 @@ export default async function Home() {
             ))
           ) : (
             <p className="text-slate-400">
-              Add published blog posts from Django Admin.
+              Not added yet..
             </p>
           )}
         </div>
       </section>
+    )}
 
       {/* HIRE ME + ARCHITECTURE PREVIEW */}
       <section className="mx-auto grid max-w-7xl gap-6 px-6 py-10 md:grid-cols-2">
@@ -436,10 +447,7 @@ export default async function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="mx-auto max-w-7xl px-6 py-10 text-center text-sm text-slate-500">
-        © 2026 Aarjan Pokharel. Built with Django, Next.js, FastAPI, Docker,
-        Terraform, Ansible, GitHub Actions, and AWS.
-      </footer>
+      <Footer profile={profile} />
     </main>
   );
 }
