@@ -143,8 +143,6 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
   return fetchFromApi<BlogPost[]>('/api/blog/posts/');
 }
 
-
-
 export async function getBlogPost(slug: string): Promise<BlogPostDetail> {
   return fetchFromApi<BlogPostDetail>(`/api/blog/posts/${slug}/`);
 }
@@ -170,4 +168,16 @@ export async function sendContactMessage(
   }
 
   return response.json();
+}
+
+export function formatDisplayDate(dateString: string | null): string {
+  if (!dateString) {
+    return "Present";
+  }
+
+  return new Date(dateString).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 }

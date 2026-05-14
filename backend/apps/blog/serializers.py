@@ -49,10 +49,13 @@ class BlogPostDetailSerializer(serializers.ModelSerializer):
         ]
 
     def get_cover_image_url(self, obj):
-        request = self.context.get('request')
+        request = self.context.get("request")
 
         if obj.cover_image:
             url = obj.cover_image.url
             return request.build_absolute_uri(url) if request else url
+
+        if obj.cover_image_url:
+            return obj.cover_image_url
 
         return None

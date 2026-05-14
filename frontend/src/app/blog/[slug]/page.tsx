@@ -21,41 +21,49 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100">
+    <main className="min-h-screen text-slate-100">
       <article className="mx-auto max-w-4xl px-6 py-16">
         <Link
           href="/blog"
-          className="mb-8 inline-block text-sm font-semibold text-cyan-400 hover:text-cyan-300"
+          className="mb-8 inline-flex items-center rounded-full border border-slate-800 bg-slate-900/70 px-4 py-2 text-sm font-semibold text-cyan-400 transition hover:border-cyan-400/50 hover:text-cyan-300"
         >
           ← Back to Blog
         </Link>
 
-        {post.cover_image_url && (
-          <img
-            src={post.cover_image_url}
-            alt={post.title}
-            className="mb-8 h-80 w-full rounded-2xl object-cover"
-          />
-        )}
+        <div className="overflow-hidden rounded-[2rem] border border-slate-800 bg-slate-900/70 shadow-2xl shadow-slate-950/40">
+          {post.cover_image_url && (
+            <img
+              src={post.cover_image_url}
+              alt={post.title}
+              className="h-80 w-full object-cover"
+            />
+          )}
 
-        <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-cyan-400">
-          Blog Post
-        </p>
+          <div className="p-8 md:p-12">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-cyan-400">
+              Blog Post
+            </p>
 
-        <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-          {post.title}
-        </h1>
+            <h1 className="text-4xl font-bold tracking-tight text-white md:text-6xl">
+              {post.title}
+            </h1>
 
-        {post.published_at && (
-          <p className="mt-4 text-sm text-slate-500">
-            Published on {new Date(post.published_at).toLocaleDateString()}
-          </p>
-        )}
+            {post.published_at && (
+              <p className="mt-5 text-sm text-slate-500">
+                Published on {new Date(post.published_at).toLocaleDateString()}
+              </p>
+            )}
 
-        <p className="mt-6 text-xl text-slate-300">{post.excerpt}</p>
+            <p className="mt-8 text-xl leading-8 text-slate-300">
+              {post.excerpt}
+            </p>
 
-        <div className="mt-10 whitespace-pre-line leading-8 text-slate-300">
-          {post.content}
+            <div className="mt-10 border-t border-slate-800 pt-10">
+              <div className="whitespace-pre-line text-lg leading-9 text-slate-300">
+                {post.content}
+              </div>
+            </div>
+          </div>
         </div>
       </article>
     </main>

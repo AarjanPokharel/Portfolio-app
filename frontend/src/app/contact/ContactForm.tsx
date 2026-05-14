@@ -18,6 +18,9 @@ const messageTypeOptions = [
   { value: "collaboration", label: "Collaboration" },
 ];
 
+const inputClass =
+  "w-full rounded-xl border border-slate-700 bg-slate-950/80 px-4 py-3 text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20";
+
 export default function ContactForm({
   defaultMessageType = "general",
   defaultSubject = "",
@@ -76,7 +79,7 @@ export default function ContactForm({
           required
           value={messageType}
           onChange={(event) => setMessageType(event.target.value)}
-          className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none focus:border-cyan-400"
+          className={inputClass}
         >
           {messageTypeOptions.map((option) => (
             <option key={option.value} value={option.value}>
@@ -96,7 +99,7 @@ export default function ContactForm({
           required
           value={name}
           onChange={(event) => setName(event.target.value)}
-          className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none focus:border-cyan-400"
+          className={inputClass}
           placeholder="Your name"
         />
       </div>
@@ -111,7 +114,7 @@ export default function ContactForm({
           required
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none focus:border-cyan-400"
+          className={inputClass}
           placeholder="your.email@example.com"
         />
       </div>
@@ -125,7 +128,7 @@ export default function ContactForm({
           type="text"
           value={subject}
           onChange={(event) => setSubject(event.target.value)}
-          className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none focus:border-cyan-400"
+          className={inputClass}
           placeholder="Internship opportunity, collaboration, project help..."
         />
       </div>
@@ -140,19 +143,19 @@ export default function ContactForm({
           value={message}
           onChange={(event) => setMessage(event.target.value)}
           rows={6}
-          className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 outline-none focus:border-cyan-400"
+          className={inputClass}
           placeholder="Write your message here..."
         />
       </div>
 
       {successMessage && (
-        <p className="rounded-xl border border-green-800 bg-green-950 px-4 py-3 text-green-300">
+        <p className="rounded-xl border border-emerald-700/60 bg-emerald-950/70 px-4 py-3 text-emerald-300">
           {successMessage}
         </p>
       )}
 
       {errorMessage && (
-        <p className="rounded-xl border border-red-800 bg-red-950 px-4 py-3 text-red-300">
+        <p className="rounded-xl border border-red-700/60 bg-red-950/70 px-4 py-3 text-red-300">
           {errorMessage}
         </p>
       )}
@@ -160,7 +163,7 @@ export default function ContactForm({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded-xl bg-cyan-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full rounded-xl bg-cyan-400 px-6 py-3 font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? "Sending..." : "Send Message"}
       </button>

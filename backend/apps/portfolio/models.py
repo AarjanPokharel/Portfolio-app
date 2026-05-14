@@ -21,6 +21,11 @@ class Profile(models.Model):
         null=True
     )
 
+    profile_image_url = models.URLField(
+        blank=True,
+        help_text="Optional external image URL. Used if no local image is uploaded."
+    )
+
     resume_file = models.FileField(
         upload_to='resumes/',
         blank=True,
@@ -127,6 +132,11 @@ class Project(models.Model):
         upload_to='projects/',
         blank=True,
         null=True
+    )
+
+    image_url = models.URLField(
+        blank=True,
+        help_text="Optional external project image URL. Used if no local image is uploaded."
     )
 
     featured = models.BooleanField(default=False)

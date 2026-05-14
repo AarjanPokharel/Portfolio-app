@@ -25,6 +25,11 @@ class BlogPost(models.Model):
         blank=True,
         null=True
     )
+
+    cover_image_url = models.URLField(
+        blank=True,
+        help_text="Optional external blog cover image URL. Used if no local image is uploaded."
+    )
     
     status = models.CharField(
         max_length=20,

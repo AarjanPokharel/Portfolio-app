@@ -26,11 +26,14 @@ class ProfileSerializer(serializers.ModelSerializer):
         ]
 
     def get_profile_image_url(self, obj):
-        request = self.context.get('request')
+        request = self.context.get("request")
 
         if obj.profile_image:
             url = obj.profile_image.url
             return request.build_absolute_uri(url) if request else url
+
+        if obj.profile_image_url:
+            return obj.profile_image_url
 
         return None
 
@@ -111,11 +114,14 @@ class ProjectSerializer(serializers.ModelSerializer):
         ]
 
     def get_image_url(self, obj):
-        request = self.context.get('request')
+        request = self.context.get("request")
 
         if obj.image:
             url = obj.image.url
             return request.build_absolute_uri(url) if request else url
+
+        if obj.image_url:
+            return obj.image_url
 
         return None
 
