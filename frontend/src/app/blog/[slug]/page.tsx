@@ -59,7 +59,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             </p>
 
             <div className="mt-10 border-t border-slate-800 pt-10">
-              <div className="whitespace-pre-line text-lg leading-9 text-slate-300">
+              <div className="whitespace-pre-line text-justify leading-9 text-slate-300">
                 {post.content}
               </div>
             </div>
