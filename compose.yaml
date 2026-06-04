@@ -1,0 +1,61 @@
+name: portfolio-app
+
+services:
+  postgres-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-arp_db}
+      POSTGRES_USER: ${POSTGRES_USER:-arp_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-arp_password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-arp_user}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,backend}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:3000}
+      DB_ENGINE: django.db.backends.postgresql
+      DB_NAME: ${POSTGRES_DB:-arp_db}
+      DB_USER: ${POSTGRES_USER:-arp_user}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-arp_password}
+      DB_HOST: postgres-db
+      DB_PORT: 5432      
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+  
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres_data:
+  
+
+
+
+    
+      
