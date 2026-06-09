@@ -12,7 +12,7 @@ export default function Footer({ profile }: FooterProps) {
       <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-8">
         <div className="grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-center">
           <div>
-            <h2 className="text-2xl font-bold text-white">Aarjan Pokharel</h2>
+            <h2 className="text-2xl font-bold text-white">{profile?.full_name || "Aarjan Pokharel"}</h2>
             <p className="mt-3 max-w-xl leading-7 text-slate-400">
               Cloud-native portfolio built with Django REST Framework, Next.js,
               PostgreSQL, Docker, and AWS.
@@ -68,7 +68,7 @@ export default function Footer({ profile }: FooterProps) {
         </div>
 
         <div className="mt-8 flex flex-col justify-between gap-4 border-t border-slate-800 pt-6 text-sm text-slate-500 md:flex-row">
-          <p>© {new Date().getFullYear()} Aarjan Pokharel. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {profile?.full_name || "Aarjan Pokharel"}. All rights reserved.</p>
 
           <div className="flex flex-wrap gap-4">
             <Link href="/" className="transition hover:text-cyan-300">Home</Link>

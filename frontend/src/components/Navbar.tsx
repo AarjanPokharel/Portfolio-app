@@ -13,7 +13,7 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ name }: { name?: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -43,7 +43,7 @@ export default function Navbar() {
             AP
           </div>
           <p className="text-sm font-bold tracking-wide text-white">
-            Aarjan Pokharel
+            {name || "Aarjan Pokharel"}
           </p>
         </Link>
 

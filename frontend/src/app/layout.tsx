@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { getProfile } from "@/lib/api";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,21 +15,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aarjan Pokharel | My Portfolio",
-  description: "Cloud-native portfolio website built with Next.js, Django REST Framework, PostgreSQL, Docker, Terraform, Ansible, and AWS.",
+  title: "Aarjan Pokharel | Portfolio",
+  description: "Cloud-native portfolio website built with Next.js, Django REST Framework, PostgreSQL, Docker, and AWS.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const profile = await getProfile();
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col"><Navbar /> {children}</body>
+      <body className="min-h-full flex flex-col">
+        <Navbar name={profile?.full_name} />
+        {children}
+      </body>
     </html>
   );
 }
