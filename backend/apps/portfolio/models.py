@@ -1,5 +1,5 @@
 
-from django.core.validators import FileExtensionValidator, MaxValueValidator, MinValueValidator
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.text import slugify
 
@@ -9,6 +9,14 @@ class Profile(models.Model):
     full_name = models.CharField(max_length=100)
     headline = models.CharField(max_length=200)
     bio = models.TextField()
+    about_me = models.TextField(
+        blank=True,
+        help_text="Text shown in the About Me section on the homepage. Separate from bio."
+    )
+    architecture_description = models.TextField(
+        blank=True,
+        help_text="Description shown in the Architecture card on the homepage."
+    )
     location = models.CharField(max_length=100, blank=True)
     email = models.EmailField(blank=True)
 
@@ -83,35 +91,34 @@ class Experience(models.Model):
 
 class Skill(models.Model):
     CATEGORY_CHOICES = [
-        ('cloud', 'Cloud'),
-        ('devops', 'DevOps'),
-        ('backend', 'Backend'),
-        ('database', 'Database'),
-        ('security', 'Security'),
-        ('networking', 'Networking'),
+        ('cloud',       'Cloud'),
+        ('devops',      'DevOps & CI/CD'),
+        ('backend',     'Backend'),
+        ('database',    'Databases'),
+        ('security',    'Security'),
+        ('networking',  'Networking'),
         ('programming', 'Programming'),
-        ('tools', 'Tools'),
+        ('tools',       'Tools'),
     ]
 
-    name = models.CharField(max_length=100)
-    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
-    proficiency = models.PositiveIntegerField(
-        default=70,
-        validators=[
-            MinValueValidator(0),
-            MaxValueValidator(100),
-        ],
-        help_text='Skill level from 0 to 100',
+    category = models.CharField(
+        max_length=50,
+        choices=CATEGORY_CHOICES,
+        unique=True,
+        help_text="One record per category."
+    )
+    items = models.TextField(
+        default="",
+        blank=True,
+        help_text="Enter each skill on a new line. e.g:\nAWS EC2\nS3\nLambda"
     )
     display_order = models.PositiveIntegerField(default=0)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-
     class Meta:
-        ordering = ['display_order', 'name']
+        ordering = ['display_order', 'category']
 
     def __str__(self):
-        return f'{self.name} ({self.category})'
+        return self.get_category_display()
 
 
 class Project(models.Model):
@@ -154,4 +161,63 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Role(models.Model):
+    ICON_CHOICES = [
+        ('aws',        'AWS'),
+        ('docker',     'Docker'),
+        ('python',     'Python'),
+        ('linux',      'Linux'),
+        ('devops',     'DevOps / Gear'),
+        ('backend',    'Backend / Server'),
+        ('cloud',      'Cloud'),
+        ('automation', 'Automation / Robot'),
+        ('security',   'Security / Shield'),
+        ('database',   'Database'),
+        ('code',       'Code / Dev'),
+    ]
+
+    text = models.CharField(
+        max_length=200,
+        help_text="Role label that gets typed out, e.g. 'Cloud & DevOps Engineer'"
+    )
+    icon = models.CharField(
+        max_length=20,
+        choices=ICON_CHOICES,
+        default='code',
+        help_text="Icon shown alongside the typed text."
+    )
+    display_order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['display_order']
+
+    def __str__(self):
+        return self.text
+
+
+class Service(models.Model):
+    CATEGORY_CHOICES = [
+        ('service', 'Areas I Can Help With'),
+        ('focus', 'Best Fit Opportunities'),
+    ]
+
+    category = models.CharField(
+        max_length=20,
+        choices=CATEGORY_CHOICES,
+        unique=True,
+        help_text="Only one record per category."
+    )
+    points = models.TextField(
+        default="",
+        blank=True,
+        help_text="Enter each point on a new line. Each line becomes one bullet/tag."
+    )
+
+    class Meta:
+        ordering = ['category']
+
+    def __str__(self):
+        return self.get_category_display()
 

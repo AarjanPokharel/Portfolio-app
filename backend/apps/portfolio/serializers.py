@@ -1,7 +1,7 @@
 #portfolio
 
 from rest_framework import serializers
-from .models import Education, Experience, Profile, Project, Skill
+from .models import Education, Experience, Profile, Project, Role, Service, Skill
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -15,6 +15,8 @@ class ProfileSerializer(serializers.ModelSerializer):
             'full_name',
             'headline',
             'bio',
+            'about_me',
+            'architecture_description',
             'location',
             'email',
             'linkedin_url',
@@ -80,15 +82,15 @@ class ExperienceSerializer(serializers.ModelSerializer):
 
 
 class SkillSerializer(serializers.ModelSerializer):
+    label = serializers.CharField(source='get_category_display', read_only=True)
+    items_list = serializers.SerializerMethodField()
+
     class Meta:
         model = Skill
-        fields = [
-            'id',
-            'name',
-            'category',
-            'proficiency',
-            'display_order',
-        ]
+        fields = ['id', 'category', 'label', 'items_list', 'display_order']
+
+    def get_items_list(self, obj):
+        return [line.strip() for line in obj.items.splitlines() if line.strip()]
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -131,3 +133,20 @@ class ProjectSerializer(serializers.ModelSerializer):
             for tech in obj.tech_stack.split(',')
             if tech.strip()
         ]
+
+
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Role
+        fields = ['id', 'text', 'icon', 'display_order']
+
+
+class ServiceSerializer(serializers.ModelSerializer):
+    points_list = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Service
+        fields = ['id', 'category', 'points_list']
+
+    def get_points_list(self, obj):
+        return [line.strip() for line in obj.points.splitlines() if line.strip()]

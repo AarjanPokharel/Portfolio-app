@@ -5,6 +5,8 @@ from .views import (
     ExperienceListAPIView,
     ProjectDetailAPIView,
     ProjectListAPIView,
+    RoleListAPIView,
+    ServiceListAPIView,
     SkillListAPIView,
     profile_detail,
 )
@@ -17,4 +19,6 @@ urlpatterns = [
     path('skills/', SkillListAPIView.as_view(), name='skill-list'),
     path('projects/', ProjectListAPIView.as_view(), name='project-list'),
     path('projects/<slug:slug>/', ProjectDetailAPIView.as_view(), name='project-detail'),
+    path('services/', ServiceListAPIView.as_view(), name='service-list'),
+    path('roles/', RoleListAPIView.as_view(), name='role-list'),
 ]

@@ -7,12 +7,14 @@ from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 
-from .models import Education, Experience, Profile, Project, Skill
+from .models import Education, Experience, Profile, Project, Role, Service, Skill
 from .serializers import (
     EducationSerializer,
     ExperienceSerializer,
     ProfileSerializer,
     ProjectSerializer,
+    RoleSerializer,
+    ServiceSerializer,
     SkillSerializer,
 )
 
@@ -59,3 +61,13 @@ class ProjectDetailAPIView(RetrieveAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     lookup_field = 'slug'
+
+
+class RoleListAPIView(ListAPIView):
+    queryset = Role.objects.all()
+    serializer_class = RoleSerializer
+
+
+class ServiceListAPIView(ListAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
