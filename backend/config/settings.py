@@ -177,6 +177,10 @@ CSRF_TRUSTED_ORIGINS = config(
     cast=Csv()
 )
 
+# Tell Django it's behind an HTTPS proxy (Nginx terminates SSL)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
