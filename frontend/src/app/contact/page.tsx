@@ -15,9 +15,8 @@ export default function ContactPage() {
             </h1>
 
             <p className="mt-6 leading-8 text-slate-400">
-              Use this form to reach out for internships, cloud or DevOps
-              opportunities, collaboration, technical discussions, or project
-              feedback.
+              Whether it&apos;s a job opportunity, a project idea, a question,
+              or just a conversation — feel free to reach out.
             </p>
           </div>
 

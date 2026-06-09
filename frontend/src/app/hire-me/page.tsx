@@ -39,14 +39,13 @@ export default async function HireMePage() {
             </p>
 
             <h1 className="text-4xl font-bold tracking-tight text-white md:text-6xl">
-              Need help with cloud, backend, or DevOps work?
+              Let&apos;s build something together.
             </h1>
 
             <p className="mt-6 leading-8 text-slate-400">
-              I am building practical experience in cloud engineering, DevOps,
-              backend APIs, automation, and AWS-based deployments. Use this page
-              to contact me for job opportunities, internships, collaboration,
-              or project-based work.
+              I&apos;m actively looking for roles and projects where I can contribute,
+              learn, and ship real work. If you have something interesting in mind,
+              I&apos;d love to hear about it.
             </p>
           </div>
 

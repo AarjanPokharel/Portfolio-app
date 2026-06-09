@@ -177,26 +177,26 @@ export default async function Home() {
 
       {/* ── TECH STACK ──────────────────────────────────────────── */}
       {displayedSkills.length > 0 && (
-        <section id="skills" className="mx-auto max-w-7xl px-6">
+        <section id="skills" className="mx-auto max-w-7xl px-6 py-16">
           <ScrollReveal>
-            <div className="mb-8 text-center">
+            <div className="mb-10 text-center">
               <p className="text-sm uppercase tracking-widest text-cyan-400">Tech Stack</p>
-              {/* <h2 className="mt-3 text-3xl font-bold text-white">Technologies I work with</h2> */}
+              <h2 className="mt-3 text-3xl font-bold text-white">Technologies I work with</h2>
             </div>
           </ScrollReveal>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {displayedSkills.map((skill, i) => (
               <ScrollReveal key={skill.id} delay={i * 60}>
-                <div className={`h-full rounded-2xl border p-5 ${getSkillColor(skill.category)} bg-opacity-10`}>
-                  <p className="mb-3 text-xs font-semibold uppercase tracking-widest opacity-80">
+                <div className={`h-full rounded-2xl border p-5 ${getSkillColor(skill.category)}`}>
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-widest opacity-70">
                     {skill.label}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {skill.items_list.map((item) => (
                       <span
                         key={item}
-                        className="rounded-lg border border-current/20 bg-current/10 px-3 py-1 text-sm font-medium opacity-90 transition hover:opacity-100"
+                        className="rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-sm font-medium transition hover:bg-white/10"
                       >
                         {item}
                       </span>
@@ -234,7 +234,7 @@ export default async function Home() {
 
               <p className="mt-5 leading-8 text-slate-400">
                 {profile?.about_me ||
-                  "I am a Computer Science student and aspiring DevOps Engineer. I enjoy building backend APIs, automating infrastructure, and deploying applications on the cloud."}
+                  "I'm a Computer Science student who enjoys building things — from backend APIs and full-stack apps to cloud infrastructure and automation. I like understanding how systems work end to end."}
               </p>
 
               {/* Stats */}
@@ -243,7 +243,7 @@ export default async function Home() {
                   { value: projects.length > 0 ? `${projects.length}+` : "0", label: "Projects" },
                   { value: skills.length > 0 ? `${skills.length}+` : "0", label: "Technologies" },
                   { value: "24/7", label: "Learning" },
-                  { value: "☁", label: "Cloud Focused", isCyan: true },
+                  { value: "🛠", label: "Always Building", isCyan: true },
                 ].map(({ value, label, isCyan }) => (
                   <div
                     key={label}
@@ -285,7 +285,7 @@ export default async function Home() {
             <div className="mb-8 flex items-end justify-between gap-4">
               <div>
                 <p className="text-sm uppercase tracking-widest text-cyan-400">Featured Projects</p>
-                <h2 className="mt-3 text-3xl font-bold text-white">Real cloud and DevOps practice projects</h2>
+                <h2 className="mt-3 text-3xl font-bold text-white">Things I&apos;ve built</h2>
               </div>
             </div>
           </ScrollReveal>
@@ -356,7 +356,7 @@ export default async function Home() {
             <div className="mb-8 flex items-end justify-between gap-4">
               <div>
                 <p className="text-sm uppercase tracking-widest text-cyan-400">Recent Blogs</p>
-                <h2 className="mt-3 text-3xl font-bold text-white">Notes from my cloud and DevOps journey</h2>
+                <h2 className="mt-3 text-3xl font-bold text-white">From the blog</h2>
               </div>
               <Link href="/blog" className="hidden text-sm font-semibold text-cyan-400 transition hover:text-cyan-300 md:block">
                 View all posts →
@@ -404,11 +404,12 @@ export default async function Home() {
           <div className="h-full rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-slate-900 via-slate-900 to-cyan-950/30 p-8 shadow-lg shadow-cyan-950/20">
             <p className="text-sm uppercase tracking-widest text-cyan-400">Hire Me</p>
             <h2 className="mt-4 text-3xl font-bold text-white">
-              Looking for cloud, backend, or DevOps help?
+              Want to work together?
             </h2>
             <p className="mt-5 leading-8 text-slate-400">
-              I am open to DevOps internships, cloud engineering opportunities,
-              backend Python projects, and project-based collaboration.
+              I&apos;m looking for opportunities to build real things — backend systems,
+              cloud infrastructure, full-stack projects, or anything in between.
+              Open to internships, freelance, and collaboration.
             </p>
             <Link
               href="/hire-me"

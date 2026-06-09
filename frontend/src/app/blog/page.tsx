@@ -13,12 +13,12 @@ export default async function BlogPage() {
           </p>
 
           <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-white md:text-6xl">
-            Technical writing from my cloud and DevOps journey.
+            Writing, notes, and things on my mind.
           </h1>
 
           <p className="mt-6 max-w-2xl leading-8 text-slate-400">
-            I use this space to document what I learn while building backend,
-            cloud, DevOps, automation, security, and deployment projects.
+            Tech deep-dives, project write-ups, and whatever else I find interesting.
+            Not limited to any one topic.
           </p>
         </div>
 
