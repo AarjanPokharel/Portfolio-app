@@ -8,12 +8,27 @@ export type Profile = {
   full_name: string;
   headline: string;
   bio: string;
+  about_me: string;
+  architecture_description: string;
   location: string;
   email: string;
   linkedin_url: string;
   github_url: string;
   profile_image_url: string | null;
   resume_file_url: string | null;
+};
+
+export type Service = {
+  id: number;
+  category: 'service' | 'focus';
+  points_list: string[];
+};
+
+export type Role = {
+  id: number;
+  text: string;
+  icon: string;
+  display_order: number;
 };
 
 export type Education = {
@@ -42,9 +57,9 @@ export type Experience = {
 
 export type Skill = {
   id: number;
-  name: string;
   category: string;
-  proficiency: number;
+  label: string;
+  items_list: string[];
   display_order: number;
 };
 
@@ -147,6 +162,14 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 
 export async function getBlogPost(slug: string): Promise<BlogPostDetail> {
   return fetchFromApi<BlogPostDetail>(`/api/blog/posts/${slug}/`);
+}
+
+export async function getServices(): Promise<Service[]> {
+  return fetchFromApi<Service[]>('/api/portfolio/services/');
+}
+
+export async function getRoles(): Promise<Role[]> {
+  return fetchFromApi<Role[]>('/api/portfolio/roles/');
 }
 
 export async function sendContactMessage(
