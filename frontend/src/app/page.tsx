@@ -1,6 +1,7 @@
 import Link from "next/link";
 import AnimatedHeroText from "@/components/AnimatedHeroText";
 import ArchitectureDiagram from "@/components/ArchitectureDiagram";
+import ProjectSlider from "@/components/ProjectSlider";
 import InfoSlider from "@/components/InfoSlider";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -44,8 +45,8 @@ export default async function Home() {
       getRoles(),
     ]);
 
-  const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
-  const displayedProjects = featuredProjects.length > 0 ? featuredProjects : projects.slice(0, 3);
+  const featuredProjects = projects.filter((p) => p.featured);
+  const displayedProjects = featuredProjects.length > 0 ? featuredProjects : projects;
   const displayedBlogPosts = blogPosts.slice(0, 3);
   const displayedSkills = skills;
 
@@ -291,62 +292,7 @@ export default async function Home() {
             </div>
           </ScrollReveal>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {displayedProjects.map((project, i) => (
-              <ScrollReveal key={project.id} delay={i * 80}>
-                <article className="card-glow group flex h-full flex-col rounded-3xl border border-slate-800 bg-slate-900/70 p-5 transition hover:-translate-y-1 hover:border-cyan-400/50">
-                  {project.image_url ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={project.image_url}
-                      alt={project.title}
-                      className="mb-5 h-44 w-full rounded-2xl object-cover transition duration-300 group-hover:brightness-110"
-                    />
-                  ) : (
-                    <div className="mb-5 flex h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 text-slate-600">
-                      <svg className="h-10 w-10 opacity-30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                        <rect x="3" y="3" width="18" height="18" rx="2" />
-                        <circle cx="8.5" cy="8.5" r="1.5" /><polyline points="21 15 16 10 5 21" />
-                      </svg>
-                    </div>
-                  )}
-
-                  <h3 className="text-xl font-semibold text-white group-hover:text-cyan-300 transition">
-                    {project.title}
-                  </h3>
-
-                  <p className="mt-3 line-clamp-3 flex-1 text-sm leading-6 text-slate-400">
-                    {project.short_description}
-                  </p>
-
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {project.tech_stack_list.slice(0, 4).map((tech) => (
-                      <span key={tech} className="rounded-full bg-cyan-400/10 px-3 py-1 text-xs text-cyan-300">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="mt-5 flex gap-4">
-                    {project.github_url && (
-                      <a href={project.github_url} target="_blank" rel="noreferrer"
-                        className="flex items-center gap-1.5 text-sm font-semibold text-slate-400 transition hover:text-cyan-300"
-                      >
-                        <GitHubIcon className="h-4 w-4" /> GitHub
-                      </a>
-                    )}
-                    {project.live_url && (
-                      <a href={project.live_url} target="_blank" rel="noreferrer"
-                        className="flex items-center gap-1.5 text-sm font-semibold text-slate-400 transition hover:text-cyan-300"
-                      >
-                        <ExternalLinkIcon className="h-4 w-4" /> Live Demo
-                      </a>
-                    )}
-                  </div>
-                </article>
-              </ScrollReveal>
-            ))}
-          </div>
+          <ProjectSlider projects={displayedProjects} />
         </section>
       )}
 
