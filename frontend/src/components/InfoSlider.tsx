@@ -91,7 +91,7 @@ export default function InfoSlider({
             </div>
 
             {currentItem.description && (
-              <p className="mt-5 line-clamp-4 whitespace-pre-line leading-8 text-slate-400">
+              <p className="mt-5 whitespace-pre-line leading-8 text-slate-400">
                 {currentItem.description}
               </p>
             )}
