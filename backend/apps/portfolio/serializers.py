@@ -28,23 +28,17 @@ class ProfileSerializer(serializers.ModelSerializer):
         ]
 
     def get_profile_image_url(self, obj):
-        request = self.context.get("request")
-
         if obj.profile_image:
-            url = obj.profile_image.url
-            return request.build_absolute_uri(url) if request else url
+            return obj.profile_image.url  # relative path e.g. /media/profile/...
 
         if obj.profile_image_url:
-            return obj.profile_image_url
+            return obj.profile_image_url  # external URL stored directly
 
         return None
 
     def get_resume_file_url(self, obj):
-        request = self.context.get('request')
-
         if obj.resume_file:
-            url = obj.resume_file.url
-            return request.build_absolute_uri(url) if request else url
+            return obj.resume_file.url  # relative path e.g. /media/resumes/...
 
         return None
 
@@ -116,14 +110,11 @@ class ProjectSerializer(serializers.ModelSerializer):
         ]
 
     def get_image_url(self, obj):
-        request = self.context.get("request")
-
         if obj.image:
-            url = obj.image.url
-            return request.build_absolute_uri(url) if request else url
+            return obj.image.url  # relative path e.g. /media/projects/...
 
         if obj.image_url:
-            return obj.image_url
+            return obj.image_url  # external URL stored directly
 
         return None
 
