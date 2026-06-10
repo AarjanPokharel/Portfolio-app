@@ -59,9 +59,10 @@ export default function Footer({ profile }: FooterProps) {
                 href={profile.resume_file_url}
                 target="_blank"
                 rel="noreferrer"
+                download
                 className="rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-300 transition hover:border-cyan-400 hover:text-cyan-300"
               >
-                Resume ↗
+                Resume ↓
               </a>
             )}
           </div>

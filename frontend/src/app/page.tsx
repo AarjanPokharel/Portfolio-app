@@ -121,6 +121,7 @@ export default async function Home() {
                 href={profile.resume_file_url}
                 target="_blank"
                 rel="noreferrer"
+                download
                 className="rounded-xl border border-slate-700 bg-slate-900/70 px-5 py-3 font-semibold text-slate-200 transition hover:border-cyan-400 hover:text-cyan-300"
               >
                 Resume ↓

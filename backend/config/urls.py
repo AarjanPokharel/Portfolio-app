@@ -30,5 +30,5 @@ urlpatterns = [
     path("api/contact/", include("apps.contact.urls")),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Always serve media files (portfolio app uses runserver, no separate media server)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
