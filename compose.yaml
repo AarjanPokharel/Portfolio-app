@@ -41,15 +41,14 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-https://workwithaarjan.dev}
     restart: unless-stopped
     depends_on:
       - backend
     environment:
       INTERNAL_API_URL: http://backend:8000
       NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-https://workwithaarjan.dev}
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
 
   nginx:
     image: nginx:alpine

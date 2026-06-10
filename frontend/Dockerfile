@@ -4,10 +4,16 @@ WORKDIR /app
 
 COPY package*.json .
 
-RUN npm install 
+RUN npm install
 
 COPY . .
 
+# Build the Next.js app for production
+ARG NEXT_PUBLIC_API_BASE_URL
+ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
+
+RUN npm run build
+
 EXPOSE 3000
 
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "start" ]
