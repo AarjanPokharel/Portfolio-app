@@ -388,10 +388,10 @@ export default async function Home() {
             <div className="mt-8">
               {profile?.location && (
                 <p className="mb-5 flex items-center gap-2 text-sm text-slate-400">
-                  <svg className="h-4 w-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  {/* <svg className="h-4 w-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                     <circle cx="12" cy="10" r="3" />
-                  </svg>
+                  </svg> */}
                   {/* Based in {profile.location} */}
                 </p>
               )}
