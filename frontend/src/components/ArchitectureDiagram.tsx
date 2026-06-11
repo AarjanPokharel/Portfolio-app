@@ -22,12 +22,12 @@ function Box({
   children?: React.ReactNode;
 }) {
   return (
-    <div className={`rounded-xl border ${accent} bg-slate-950/60 p-3`}>
+    <div className={`min-w-0 flex-1 rounded-xl border ${accent} bg-slate-950/60 p-3`}>
       <div className="flex items-center gap-2">
         {icon && <span className="flex-shrink-0">{icon}</span>}
-        <div>
+        <div className="min-w-0">
           <p className="text-sm font-semibold text-white">{title}</p>
-          {subtitle && <p className="text-xs text-slate-500">{subtitle}</p>}
+          {subtitle && <p className="truncate text-xs text-slate-500">{subtitle}</p>}
         </div>
       </div>
       {children && <div className="mt-2">{children}</div>}
@@ -64,10 +64,10 @@ function ArrowRight({ label }: { label?: string }) {
 
 export default function ArchitectureDiagram() {
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-5 text-sm">
+    <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-3 text-sm sm:p-5">
 
       {/* ── Row 1: Developer → GitHub ───────────────────────────── */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         {/* Developer */}
         <Box
           title="VS Code"

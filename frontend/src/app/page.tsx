@@ -70,7 +70,7 @@ export default async function Home() {
     <main className="min-h-screen text-slate-100">
 
       {/* ── HERO ────────────────────────────────────────────────── */}
-      <section className="relative mx-auto flex min-h-[calc(100vh-65px)] max-w-7xl items-center px-6 py-20">
+      <section className="relative mx-auto flex min-h-[calc(100svh-65px)] max-w-7xl items-center overflow-hidden px-6 py-20">
         {/* Dot grid */}
         <div className="dot-grid pointer-events-none absolute inset-0 opacity-40" />
 
@@ -79,10 +79,10 @@ export default async function Home() {
         <div className="pointer-events-none absolute right-20 top-24 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
         <div className="pointer-events-none absolute bottom-10 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-violet-500/8 blur-3xl" />
 
-        <div className="relative max-w-4xl">
+        <div className="relative w-full max-w-4xl">
           {/* Status badge */}
-          <div className="hero-animate mb-7 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm text-cyan-300" style={{ animationDelay: "0ms" }}>
-            <span className="relative flex h-2 w-2">
+          <div className="hero-animate mb-7 inline-flex items-start gap-2 rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm text-cyan-300 sm:rounded-full sm:items-center" style={{ animationDelay: "0ms" }}>
+            <span className="relative mt-1.5 flex h-2 w-2 flex-shrink-0 sm:mt-0">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
             </span>
@@ -90,7 +90,7 @@ export default async function Home() {
           </div>
 
           {/* Heading */}
-          <h1 className="hero-animate text-5xl font-bold leading-tight tracking-tight text-white md:text-7xl" style={{ animationDelay: "80ms" }}>
+          <h1 className="hero-animate text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-7xl" style={{ animationDelay: "80ms" }}>
             Hi, I&apos;m{" "}
             <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-violet-400 bg-clip-text text-transparent">
               {profile?.full_name || "Aarjan Pokharel"}

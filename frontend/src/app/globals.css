@@ -7,14 +7,20 @@
 
 html {
   scroll-behavior: smooth;
+  /* Fills the overscroll / zoom-out area so it never shows white */
+  background-color: var(--background);
+  /* Prevent stray decorative elements from creating horizontal scroll */
+  overflow-x: hidden;
 }
 
 body {
-  background:
+  background-color: var(--background);
+  background-image:
     radial-gradient(circle at top left, rgba(14, 165, 233, 0.16), transparent 35%),
     radial-gradient(circle at top right, rgba(124, 58, 237, 0.12), transparent 30%),
     radial-gradient(circle at bottom, rgba(15, 23, 42, 0.95), #020617 55%);
   color: var(--foreground);
+  overflow-x: hidden;
 }
 
 * {
