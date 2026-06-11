@@ -38,7 +38,7 @@ export default async function BlogPage() {
                 <img
                   src={post.cover_image_url}
                   alt={post.title}
-                  className="mb-5 h-48 w-full rounded-2xl object-cover"
+                  className="mb-5 h-48 w-full rounded-2xl bg-slate-950 object-contain"
                 />
               ) : (
                 <div className="mb-5 flex h-48 items-center justify-center rounded-2xl bg-slate-950 text-slate-600">

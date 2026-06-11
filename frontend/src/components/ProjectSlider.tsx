@@ -42,7 +42,7 @@ export default function ProjectSlider({ projects }: Props) {
               <img
                 src={project.image_url}
                 alt={project.title}
-                className="mb-5 h-44 w-full rounded-2xl object-cover transition duration-300 group-hover:brightness-110"
+                className="mb-5 h-44 w-full rounded-2xl bg-slate-950 object-contain transition duration-300 group-hover:brightness-110"
               />
             ) : (
               <div className="mb-5 flex h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 text-slate-600">

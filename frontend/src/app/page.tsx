@@ -317,7 +317,7 @@ export default async function Home() {
                 <article className="card-glow group flex h-full flex-col rounded-3xl border border-slate-800 bg-slate-900/70 p-5 transition hover:-translate-y-1 hover:border-cyan-400/50">
                   {post.cover_image_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={post.cover_image_url} alt={post.title} className="mb-5 h-44 w-full rounded-2xl object-cover" />
+                    <img src={post.cover_image_url} alt={post.title} className="mb-5 h-44 w-full rounded-2xl bg-slate-950 object-contain" />
                   ) : (
                     <div className="mb-5 flex h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 text-slate-600">
                       <svg className="h-10 w-10 opacity-30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
@@ -346,9 +346,9 @@ export default async function Home() {
       )}
 
       {/* ── HIRE ME + ARCHITECTURE ──────────────────────────────── */}
-      <section className="mx-auto grid max-w-7xl gap-6 px-6 py-10 md:grid-cols-2">
+      <section className="mx-auto grid max-w-7xl gap-6 px-6 py-10 md:grid-cols-2 md:items-start">
         <ScrollReveal>
-          <div className="flex h-full flex-col rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-slate-900 via-slate-900 to-cyan-950/30 p-8 shadow-lg shadow-cyan-950/20">
+          <div className="flex flex-col rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-slate-900 via-slate-900 to-cyan-950/30 p-8 shadow-lg shadow-cyan-950/20">
             {/* Availability status */}
             <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
               <span className="relative flex h-2 w-2">
@@ -384,8 +384,8 @@ export default async function Home() {
               </div>
             </div>
 
-            {/* Meta + CTAs pinned to bottom */}
-            <div className="mt-auto pt-8">
+            {/* Meta + CTAs */}
+            <div className="mt-8">
               {profile?.location && (
                 <p className="mb-5 flex items-center gap-2 text-sm text-slate-400">
                   <svg className="h-4 w-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
