@@ -27,8 +27,7 @@ export default function ContactPage() {
               </h2>
 
               <p className="mt-3 leading-7 text-slate-400">
-                Your message is stored in the Django backend and visible to me
-                through Django Admin.
+                Your message is always appreciated...
               </p>
             </div>
 
