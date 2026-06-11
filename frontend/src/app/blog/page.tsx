@@ -25,8 +25,7 @@ export default async function BlogPage() {
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {blogPosts.length === 0 && (
             <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-8 text-slate-400">
-              No published blog posts yet. Add one from Django Admin and set it
-              to published.
+              No published blog posts yet.
             </div>
           )}
 
