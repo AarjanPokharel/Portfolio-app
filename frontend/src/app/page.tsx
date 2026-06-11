@@ -348,22 +348,72 @@ export default async function Home() {
       {/* ── HIRE ME + ARCHITECTURE ──────────────────────────────── */}
       <section className="mx-auto grid max-w-7xl gap-6 px-6 py-10 md:grid-cols-2">
         <ScrollReveal>
-          <div className="h-full rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-slate-900 via-slate-900 to-cyan-950/30 p-8 shadow-lg shadow-cyan-950/20">
+          <div className="flex h-full flex-col rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-slate-900 via-slate-900 to-cyan-950/30 p-8 shadow-lg shadow-cyan-950/20">
+            {/* Availability status */}
+            <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              Available for opportunities
+            </div>
+
             <p className="text-sm uppercase tracking-widest text-cyan-400">Hire Me</p>
-            <h2 className="mt-4 text-3xl font-bold text-white">
+            <h2 className="mt-3 text-3xl font-bold text-white">
               Want to work together?
             </h2>
             <p className="mt-5 leading-8 text-slate-400">
               I&apos;m looking for opportunities to build real things — backend systems,
               cloud infrastructure, full-stack projects, or anything in between.
-              Open to internships, freelance, and collaboration.
             </p>
-            <Link
-              href="/hire-me"
-              className="mt-6 inline-block rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-300"
-            >
-              Send Hiring Inquiry →
-            </Link>
+
+            {/* What I'm open to */}
+            <div className="mt-6">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-slate-500">
+                Open to
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {["Internships", "Freelance", "Collaboration", "Full-time"].map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-slate-700 bg-slate-950/60 px-3 py-1 text-sm text-slate-300"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Meta + CTAs pinned to bottom */}
+            <div className="mt-auto pt-8">
+              {profile?.location && (
+                <p className="mb-5 flex items-center gap-2 text-sm text-slate-400">
+                  <svg className="h-4 w-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  Based in {profile.location}
+                </p>
+              )}
+
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/hire-me"
+                  className="inline-block rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-300"
+                >
+                  Send Hiring Inquiry →
+                </Link>
+
+                {profile?.email && (
+                  <a
+                    href={`mailto:${profile.email}`}
+                    className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/70 px-5 py-3 font-semibold text-slate-200 transition hover:border-cyan-400 hover:text-cyan-300"
+                  >
+                    <EmailIcon className="h-4 w-4" /> Email me
+                  </a>
+                )}
+              </div>
+            </div>
           </div>
         </ScrollReveal>
 
