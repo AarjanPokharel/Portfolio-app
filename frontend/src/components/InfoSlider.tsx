@@ -80,7 +80,7 @@ export default function InfoSlider({
                   {currentItem.title}
                 </h3>
 
-                <p className="mt-2 text-cyan-300">{currentItem.subtitle}</p>
+                <p className="mt-2 font-medium text-accent-soft">{currentItem.subtitle}</p>
               </div>
 
               {currentItem.meta && (
