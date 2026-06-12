@@ -21,15 +21,15 @@ import {
 function getSkillColor(category: string): string {
   const c = category.toLowerCase();
   if (c.includes("cloud") || c.includes("aws") || c.includes("azure") || c.includes("gcp"))
-    return "text-orange-500";
+    return "text-orange-400 light:text-orange-600";
   if (c.includes("devops") || c.includes("ci") || c.includes("cd") || c.includes("docker") || c.includes("k8s") || c.includes("container"))
-    return "text-blue-500";
+    return "text-blue-400 light:text-blue-600";
   if (c.includes("backend") || c.includes("python") || c.includes("django") || c.includes("api") || c.includes("database") || c.includes("db"))
-    return "text-emerald-500";
+    return "text-emerald-400 light:text-emerald-600";
   if (c.includes("frontend") || c.includes("react") || c.includes("next") || c.includes("js") || c.includes("css") || c.includes("ui"))
-    return "text-violet-500";
+    return "text-violet-400 light:text-violet-600";
   if (c.includes("infra") || c.includes("terraform") || c.includes("ansible") || c.includes("linux") || c.includes("network"))
-    return "text-yellow-500";
+    return "text-amber-400 light:text-amber-600";
   return "text-accent-soft";
 }
 
