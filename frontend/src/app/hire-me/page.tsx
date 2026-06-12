@@ -30,19 +30,19 @@ export default async function HireMePage() {
   const focusPoints = focusRecord?.points_list.length ? focusRecord.points_list : defaultFocusAreas;
 
   return (
-    <main className="min-h-screen text-slate-100">
+    <main className="min-h-screen text-content">
       <section className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-[0.95fr_1.05fr]">
         <div>
-          <div className="rounded-[2rem] border border-slate-800 bg-slate-900/70 p-8 shadow-2xl shadow-slate-950/40">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-cyan-400">
+          <div className="rounded-[2rem] border border-line bg-surface/70 p-8 shadow-2xl shadow-slate-950/40">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-accent-soft">
               Hire Me
             </p>
 
-            <h1 className="text-4xl font-bold tracking-tight text-white md:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tight text-content md:text-6xl">
               Let&apos;s build something together.
             </h1>
 
-            <p className="mt-6 leading-8 text-slate-400">
+            <p className="mt-6 leading-8 text-muted">
               I&apos;m actively looking for roles and projects where I can contribute,
               learn, and ship real work. If you have something interesting in mind,
               I&apos;d love to hear about it.
@@ -50,15 +50,15 @@ export default async function HireMePage() {
           </div>
 
           {/* Areas I can help with */}
-          <div className="mt-6 rounded-3xl border border-slate-800 bg-slate-900/70 p-6">
-            <h2 className="text-xl font-semibold text-white">
+          <div className="mt-6 rounded-3xl border border-line bg-surface/70 p-6">
+            <h2 className="text-xl font-semibold text-content">
               Areas I can help with
             </h2>
 
-            <ul className="mt-5 grid gap-3 text-slate-400">
+            <ul className="mt-5 grid gap-3 text-muted">
               {helpPoints.map((item) => (
                 <li key={item} className="flex gap-3">
-                  <span className="mt-1 text-cyan-400">▸</span>
+                  <span className="mt-1 text-accent-soft">▸</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -66,8 +66,8 @@ export default async function HireMePage() {
           </div>
 
           {/* Best fit opportunities */}
-          <div className="mt-6 rounded-3xl border border-slate-800 bg-slate-900/70 p-6">
-            <h2 className="text-xl font-semibold text-white">
+          <div className="mt-6 rounded-3xl border border-line bg-surface/70 p-6">
+            <h2 className="text-xl font-semibold text-content">
               Best fit opportunities
             </h2>
 
@@ -75,7 +75,7 @@ export default async function HireMePage() {
               {focusPoints.map((area) => (
                 <span
                   key={area}
-                  className="rounded-full border border-cyan-700/40 bg-cyan-950/30 px-4 py-2 text-sm text-cyan-300"
+                  className="rounded-full border border-accent/30 bg-accent/10 px-4 py-2 text-sm text-accent-soft"
                 >
                   {area}
                 </span>
@@ -87,12 +87,12 @@ export default async function HireMePage() {
         <div className="relative">
           <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-r from-cyan-500/10 to-blue-600/10 blur-2xl" />
 
-          <div className="relative rounded-[2rem] border border-slate-800 bg-slate-900/80 p-6 shadow-2xl shadow-cyan-950/20">
-            <h2 className="mb-2 text-2xl font-semibold text-white">
+          <div className="relative rounded-[2rem] border border-line bg-surface/80 p-6 shadow-2xl shadow-cyan-950/20">
+            <h2 className="mb-2 text-2xl font-semibold text-content">
               Send a hiring inquiry
             </h2>
 
-            <p className="mb-6 text-sm leading-6 text-slate-400">
+            <p className="mb-6 text-sm leading-6 text-muted">
               This form saves your inquiry directly to my dashboard.
             </p>
 

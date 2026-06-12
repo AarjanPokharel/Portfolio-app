@@ -64,7 +64,7 @@ function ArrowRight({ label }: { label?: string }) {
 
 export default function ArchitectureDiagram() {
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-3 text-sm sm:p-5">
+    <div className="rounded-2xl border border-slate-800 bg-slate-950 p-3 text-sm sm:p-5">
 
       {/* ── Row 1: Developer → GitHub ───────────────────────────── */}
       <div className="flex items-center gap-2 sm:gap-3">

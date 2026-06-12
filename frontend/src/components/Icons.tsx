@@ -122,17 +122,17 @@ export function RoleIcon({ icon, className }: { icon: string; className?: string
 
 export function getRoleIconColor(icon: string): string {
   switch (icon) {
-    case 'aws':        return 'bg-orange-500/15 text-orange-400 ring-orange-400/20';
-    case 'docker':     return 'bg-blue-500/15 text-blue-400 ring-blue-400/20';
-    case 'python':     return 'bg-yellow-500/15 text-yellow-400 ring-yellow-400/20';
-    case 'linux':      return 'bg-slate-500/15 text-slate-300 ring-slate-400/20';
-    case 'cloud':      return 'bg-sky-500/15 text-sky-400 ring-sky-400/20';
-    case 'devops':     return 'bg-violet-500/15 text-violet-400 ring-violet-400/20';
-    case 'backend':    return 'bg-emerald-500/15 text-emerald-400 ring-emerald-400/20';
-    case 'automation': return 'bg-pink-500/15 text-pink-400 ring-pink-400/20';
-    case 'security':   return 'bg-red-500/15 text-red-400 ring-red-400/20';
-    case 'database':   return 'bg-teal-500/15 text-teal-400 ring-teal-400/20';
-    default:           return 'bg-cyan-500/15 text-cyan-400 ring-cyan-400/20';
+    case 'aws':        return 'bg-orange-500/15 text-orange-400 light:text-orange-600 ring-orange-400/20';
+    case 'docker':     return 'bg-blue-500/15 text-blue-400 light:text-blue-600 ring-blue-400/20';
+    case 'python':     return 'bg-yellow-500/15 text-yellow-400 light:text-yellow-600 ring-yellow-400/20';
+    case 'linux':      return 'bg-slate-500/15 text-slate-300 light:text-slate-600 ring-slate-400/20';
+    case 'cloud':      return 'bg-sky-500/15 text-sky-400 light:text-sky-600 ring-sky-400/20';
+    case 'devops':     return 'bg-violet-500/15 text-violet-400 light:text-violet-600 ring-violet-400/20';
+    case 'backend':    return 'bg-emerald-500/15 text-emerald-400 light:text-emerald-600 ring-emerald-400/20';
+    case 'automation': return 'bg-pink-500/15 text-pink-400 light:text-pink-600 ring-pink-400/20';
+    case 'security':   return 'bg-red-500/15 text-red-400 light:text-red-600 ring-red-400/20';
+    case 'database':   return 'bg-teal-500/15 text-teal-400 light:text-teal-600 ring-teal-400/20';
+    default:           return 'bg-cyan-500/15 text-cyan-400 light:text-cyan-600 ring-cyan-400/20';
   }
 }
 

@@ -19,7 +19,7 @@ const messageTypeOptions = [
 ];
 
 const inputClass =
-  "w-full rounded-xl border border-slate-700 bg-slate-950/80 px-4 py-3 text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20";
+  "w-full rounded-xl border border-line bg-surface-2 px-4 py-3 text-content outline-none transition placeholder:text-faint focus:border-accent focus:ring-2 focus:ring-accent/20";
 
 export default function ContactForm({
   defaultMessageType = "general",
@@ -71,7 +71,7 @@ export default function ContactForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label className="mb-2 block text-sm font-medium text-slate-300">
+        <label className="mb-2 block text-sm font-medium text-muted">
           Message Type
         </label>
 
@@ -90,7 +90,7 @@ export default function ContactForm({
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-slate-300">
+        <label className="mb-2 block text-sm font-medium text-muted">
           Name
         </label>
 
@@ -105,7 +105,7 @@ export default function ContactForm({
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-slate-300">
+        <label className="mb-2 block text-sm font-medium text-muted">
           Email
         </label>
 
@@ -120,7 +120,7 @@ export default function ContactForm({
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-slate-300">
+        <label className="mb-2 block text-sm font-medium text-muted">
           Subject
         </label>
 
@@ -134,7 +134,7 @@ export default function ContactForm({
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-slate-300">
+        <label className="mb-2 block text-sm font-medium text-muted">
           Message
         </label>
 
@@ -149,13 +149,13 @@ export default function ContactForm({
       </div>
 
       {successMessage && (
-        <p className="rounded-xl border border-emerald-700/60 bg-emerald-950/70 px-4 py-3 text-emerald-300">
+        <p className="rounded-xl border border-emerald-500/40 bg-emerald-500/10 px-4 py-3 text-emerald-300 light:text-emerald-700">
           {successMessage}
         </p>
       )}
 
       {errorMessage && (
-        <p className="rounded-xl border border-red-700/60 bg-red-950/70 px-4 py-3 text-red-300">
+        <p className="rounded-xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-red-300 light:text-red-700">
           {errorMessage}
         </p>
       )}
@@ -163,7 +163,7 @@ export default function ContactForm({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full rounded-xl bg-cyan-400 px-6 py-3 font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full rounded-xl bg-accent px-6 py-3 font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-accent-soft disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? "Sending..." : "Send Message"}
       </button>
