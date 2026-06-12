@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -32,28 +33,28 @@ export default function Navbar({ name }: { name?: string }) {
     <header
       className={`sticky top-0 z-50 border-b transition-all duration-300 ${
         scrolled
-          ? "border-slate-800/80 bg-slate-950/90 shadow-lg shadow-slate-950/40 backdrop-blur-xl"
+          ? "border-line/80 bg-bg/90 shadow-lg shadow-black/10 backdrop-blur-xl"
           : "border-transparent bg-transparent backdrop-blur-sm"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-500/15 text-sm font-bold text-cyan-300 ring-1 ring-cyan-400/30 transition group-hover:bg-cyan-500/25 group-hover:ring-cyan-400/60">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/15 text-sm font-bold text-accent-soft ring-1 ring-accent/30 transition group-hover:bg-accent/25 group-hover:ring-accent/60">
             AP
           </div>
-          <p className="text-sm font-bold tracking-wide text-white">
+          <p className="text-sm font-bold tracking-wide text-content">
             {name || "Aarjan Pokharel"}
           </p>
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-6 text-sm text-slate-400 md:flex">
+        <div className="hidden items-center gap-6 text-sm text-muted md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="relative py-1 transition hover:text-cyan-300 after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-cyan-400 after:transition-all hover:after:w-full"
+              className="relative py-1 transition hover:text-accent-soft after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full"
             >
               {link.label}
             </Link>
@@ -61,10 +62,13 @@ export default function Navbar({ name }: { name?: string }) {
         </div>
 
         <div className="flex items-center gap-3">
+          {/* Theme toggle */}
+          <ThemeToggle />
+
           {/* Hire Me — desktop */}
           <Link
             href="/hire-me"
-            className="hidden rounded-full border border-cyan-400/40 bg-cyan-400/10 px-4 py-2 text-sm font-semibold text-cyan-300 transition hover:bg-cyan-400 hover:text-slate-950 md:block"
+            className="hidden rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent-soft transition hover:bg-accent hover:text-slate-950 md:block"
           >
             Hire Me
           </Link>
@@ -73,7 +77,7 @@ export default function Navbar({ name }: { name?: string }) {
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700 text-slate-400 transition hover:border-cyan-400 hover:text-cyan-300 md:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-line text-muted transition hover:border-accent hover:text-accent-soft md:hidden"
             aria-label="Toggle menu"
             aria-expanded={menuOpen}
           >
@@ -99,13 +103,13 @@ export default function Navbar({ name }: { name?: string }) {
           menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="border-t border-slate-800 bg-slate-950/95 px-6 py-5">
+        <div className="border-t border-line bg-bg/95 px-6 py-5">
           <div className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-3 py-2.5 text-sm text-slate-300 transition hover:bg-slate-800/60 hover:text-cyan-300"
+                className="rounded-lg px-3 py-2.5 text-sm text-muted transition hover:bg-surface hover:text-accent-soft"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}
@@ -113,7 +117,7 @@ export default function Navbar({ name }: { name?: string }) {
             ))}
             <Link
               href="/hire-me"
-              className="mt-3 rounded-full border border-cyan-400/40 bg-cyan-400/10 px-4 py-2.5 text-center text-sm font-semibold text-cyan-300 transition hover:bg-cyan-400 hover:text-slate-950"
+              className="mt-3 rounded-full border border-accent/40 bg-accent/10 px-4 py-2.5 text-center text-sm font-semibold text-accent-soft transition hover:bg-accent hover:text-slate-950"
               onClick={() => setMenuOpen(false)}
             >
               Hire Me

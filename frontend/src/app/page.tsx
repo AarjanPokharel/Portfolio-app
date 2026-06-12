@@ -17,20 +17,20 @@ import {
   getSkills,
 } from "@/lib/api";
 
-// Color-code skill pills by category keyword
+// Category accent color for the skill label (readable on both light & dark)
 function getSkillColor(category: string): string {
   const c = category.toLowerCase();
   if (c.includes("cloud") || c.includes("aws") || c.includes("azure") || c.includes("gcp"))
-    return "border-orange-700/50 bg-orange-950/40 text-orange-300";
+    return "text-orange-500";
   if (c.includes("devops") || c.includes("ci") || c.includes("cd") || c.includes("docker") || c.includes("k8s") || c.includes("container"))
-    return "border-blue-700/50 bg-blue-950/40 text-blue-300";
+    return "text-blue-500";
   if (c.includes("backend") || c.includes("python") || c.includes("django") || c.includes("api") || c.includes("database") || c.includes("db"))
-    return "border-emerald-700/50 bg-emerald-950/40 text-emerald-300";
+    return "text-emerald-500";
   if (c.includes("frontend") || c.includes("react") || c.includes("next") || c.includes("js") || c.includes("css") || c.includes("ui"))
-    return "border-violet-700/50 bg-violet-950/40 text-violet-300";
+    return "text-violet-500";
   if (c.includes("infra") || c.includes("terraform") || c.includes("ansible") || c.includes("linux") || c.includes("network"))
-    return "border-yellow-700/50 bg-yellow-950/40 text-yellow-300";
-  return "border-slate-700 bg-slate-950 text-slate-300";
+    return "text-yellow-500";
+  return "text-accent-soft";
 }
 
 export default async function Home() {
@@ -67,7 +67,7 @@ export default async function Home() {
   }));
 
   return (
-    <main className="min-h-screen text-slate-100">
+    <main className="min-h-screen text-content">
 
       {/* ── HERO ────────────────────────────────────────────────── */}
       <section className="relative mx-auto flex min-h-[calc(100svh-65px)] max-w-7xl items-center overflow-hidden px-6 py-20">
@@ -81,7 +81,7 @@ export default async function Home() {
 
         <div className="relative w-full max-w-4xl">
           {/* Status badge */}
-          <div className="hero-animate mb-7 inline-flex items-start gap-2 rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm text-cyan-300 sm:rounded-full sm:items-center" style={{ animationDelay: "0ms" }}>
+          <div className="hero-animate mb-7 inline-flex items-start gap-2 rounded-2xl border border-accent/20 bg-accent/10 px-4 py-2 text-sm text-accent-soft sm:rounded-full sm:items-center" style={{ animationDelay: "0ms" }}>
             <span className="relative mt-1.5 flex h-2 w-2 flex-shrink-0 sm:mt-0">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
@@ -90,9 +90,9 @@ export default async function Home() {
           </div>
 
           {/* Heading */}
-          <h1 className="hero-animate text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-7xl" style={{ animationDelay: "80ms" }}>
+          <h1 className="hero-animate text-4xl font-bold leading-tight tracking-tight text-content sm:text-5xl md:text-7xl" style={{ animationDelay: "80ms" }}>
             Hi, I&apos;m{" "}
-            <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-violet-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 bg-clip-text text-transparent">
               {profile?.full_name || "Aarjan Pokharel"}
             </span>
           </h1>
@@ -103,7 +103,7 @@ export default async function Home() {
           </div>
 
           {/* Bio */}
-          <p className="hero-animate mt-8 max-w-2xl text-lg leading-8 text-slate-400" style={{ animationDelay: "240ms" }}>
+          <p className="hero-animate mt-8 max-w-2xl text-lg leading-8 text-muted" style={{ animationDelay: "240ms" }}>
             {profile?.bio ||
               "I design, build, and deploy cloud-native applications while learning real-world backend, automation, infrastructure, and DevOps practices."}
           </p>
@@ -112,7 +112,7 @@ export default async function Home() {
           <div className="hero-animate mt-9 flex flex-wrap gap-4" style={{ animationDelay: "320ms" }}>
             <Link
               href="#projects"
-              className="rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-cyan-500/25 transition hover:bg-cyan-300 hover:shadow-cyan-400/30"
+              className="rounded-xl bg-accent px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-cyan-500/25 transition hover:bg-accent-soft hover:shadow-cyan-400/30"
             >
               View My Work →
             </Link>
@@ -123,7 +123,7 @@ export default async function Home() {
                 target="_blank"
                 rel="noreferrer"
                 download
-                className="rounded-xl border border-slate-700 bg-slate-900/70 px-5 py-3 font-semibold text-slate-200 transition hover:border-cyan-400 hover:text-cyan-300"
+                className="rounded-xl border border-line bg-surface/70 px-5 py-3 font-semibold text-content transition hover:border-accent hover:text-accent-soft"
               >
                 Resume ↓
               </a>
@@ -138,7 +138,7 @@ export default async function Home() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-800 bg-slate-900/80 text-slate-400 transition hover:border-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300"
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface/80 text-muted transition hover:border-accent hover:bg-accent/10 hover:text-accent-soft"
               >
                 <GitHubIcon className="h-5 w-5" />
               </a>
@@ -150,7 +150,7 @@ export default async function Home() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-800 bg-slate-900/80 text-slate-400 transition hover:border-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300"
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface/80 text-muted transition hover:border-accent hover:bg-accent/10 hover:text-accent-soft"
               >
                 <LinkedInIcon className="h-5 w-5" />
               </a>
@@ -160,7 +160,7 @@ export default async function Home() {
               <a
                 href={`mailto:${profile.email}`}
                 aria-label="Email"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-800 bg-slate-900/80 text-slate-400 transition hover:border-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300"
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface/80 text-muted transition hover:border-accent hover:bg-accent/10 hover:text-accent-soft"
               >
                 <EmailIcon className="h-5 w-5" />
               </a>
@@ -170,7 +170,7 @@ export default async function Home() {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-          <a href="#skills" aria-label="Scroll down" className="flex flex-col items-center gap-1 text-slate-600 transition hover:text-cyan-400">
+          <a href="#skills" aria-label="Scroll down" className="flex flex-col items-center gap-1 text-faint transition hover:text-accent-soft">
             <span className="text-xs tracking-widest uppercase">Scroll</span>
             <ArrowDownIcon className="h-4 w-4 animate-bounce-slow" />
           </a>
@@ -182,23 +182,23 @@ export default async function Home() {
         <section id="skills" className="mx-auto max-w-7xl px-6 py-16">
           <ScrollReveal>
             <div className="mb-10 text-center">
-              <p className="text-sm uppercase tracking-widest text-cyan-400">Tech Stack</p>
-              <h2 className="mt-3 text-3xl font-bold text-white">Technologies I work with</h2>
+              <p className="text-sm uppercase tracking-widest text-accent-soft">Tech Stack</p>
+              <h2 className="mt-3 text-3xl font-bold text-content">Technologies I work with</h2>
             </div>
           </ScrollReveal>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {displayedSkills.map((skill, i) => (
               <ScrollReveal key={skill.id} delay={i * 60}>
-                <div className={`h-full rounded-2xl border p-5 ${getSkillColor(skill.category)}`}>
-                  <p className="mb-3 text-xs font-semibold uppercase tracking-widest opacity-70">
+                <div className="h-full rounded-2xl border border-line bg-surface p-5">
+                  <p className={`mb-3 text-xs font-semibold uppercase tracking-widest ${getSkillColor(skill.category)}`}>
                     {skill.label}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {skill.items_list.map((item) => (
                       <span
                         key={item}
-                        className="rounded-lg border border-white/10 bg-white/5 px-3 py-1 text-sm font-medium transition hover:bg-white/10"
+                        className="rounded-lg border border-line bg-surface-2 px-3 py-1 text-sm font-medium text-muted transition hover:text-content"
                       >
                         {item}
                       </span>
@@ -214,9 +214,9 @@ export default async function Home() {
       {/* ── ABOUT ───────────────────────────────────────────────── */}
       <section id="about" className="mx-auto max-w-7xl px-6 py-20">
         <ScrollReveal>
-          <div className="grid gap-8 rounded-3xl border border-slate-800 bg-slate-900/70 p-6 md:grid-cols-[0.75fr_1.25fr] md:p-8">
+          <div className="grid gap-8 rounded-3xl border border-line bg-surface/70 p-6 md:grid-cols-[0.75fr_1.25fr] md:p-8">
             {/* Profile image */}
-            <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-950">
+            <div className="overflow-hidden rounded-2xl border border-line bg-surface-2">
               {profile?.profile_image_url ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -225,16 +225,16 @@ export default async function Home() {
                   className="h-full min-h-[280px] w-full object-cover transition duration-500 hover:scale-105"
                 />
               ) : (
-                <div className="flex min-h-[280px] items-center justify-center text-slate-600">
+                <div className="flex min-h-[280px] items-center justify-center text-faint">
                   No photo added yet
                 </div>
               )}
             </div>
 
             <div>
-              <p className="text-sm uppercase tracking-widest text-cyan-400">About Me</p>
+              <p className="text-sm uppercase tracking-widest text-accent-soft">About Me</p>
 
-              <p className="mt-5 leading-8 text-slate-400">
+              <p className="mt-5 leading-8 text-muted">
                 {profile?.about_me ||
                   "I'm a Computer Science student who enjoys building things — from backend APIs and full-stack apps to cloud infrastructure and automation. I like understanding how systems work end to end."}
               </p>
@@ -249,10 +249,10 @@ export default async function Home() {
                 ].map(({ value, label, isCyan }) => (
                   <div
                     key={label}
-                    className="rounded-2xl border border-slate-800 bg-slate-950/80 p-4 text-center transition hover:border-slate-700"
+                    className="rounded-2xl border border-line bg-surface-2/80 p-4 text-center transition hover:border-line"
                   >
-                    <p className={`text-2xl font-bold ${isCyan ? "text-cyan-300" : "text-white"}`}>{value}</p>
-                    <p className="mt-1 text-xs text-slate-500">{label}</p>
+                    <p className={`text-2xl font-bold ${isCyan ? "text-accent-soft" : "text-content"}`}>{value}</p>
+                    <p className="mt-1 text-xs text-faint">{label}</p>
                   </div>
                 ))}
               </div>
@@ -286,8 +286,8 @@ export default async function Home() {
           <ScrollReveal>
             <div className="mb-8 flex items-end justify-between gap-4">
               <div>
-                <p className="text-sm uppercase tracking-widest text-cyan-400">Featured Projects</p>
-                <h2 className="mt-3 text-3xl font-bold text-white">Things I&apos;ve built</h2>
+                <p className="text-sm uppercase tracking-widest text-accent-soft">Featured Projects</p>
+                <h2 className="mt-3 text-3xl font-bold text-content">Things I&apos;ve built</h2>
               </div>
             </div>
           </ScrollReveal>
@@ -302,10 +302,10 @@ export default async function Home() {
           <ScrollReveal>
             <div className="mb-8 flex items-end justify-between gap-4">
               <div>
-                <p className="text-sm uppercase tracking-widest text-cyan-400">Recent Blogs</p>
-                <h2 className="mt-3 text-3xl font-bold text-white">From the blog</h2>
+                <p className="text-sm uppercase tracking-widest text-accent-soft">Recent Blogs</p>
+                <h2 className="mt-3 text-3xl font-bold text-content">From the blog</h2>
               </div>
-              <Link href="/blog" className="hidden text-sm font-semibold text-cyan-400 transition hover:text-cyan-300 md:block">
+              <Link href="/blog" className="hidden text-sm font-semibold text-accent-soft transition hover:text-accent-soft md:block">
                 View all posts →
               </Link>
             </div>
@@ -314,12 +314,12 @@ export default async function Home() {
           <div className="grid gap-6 md:grid-cols-3">
             {displayedBlogPosts.map((post, i) => (
               <ScrollReveal key={post.id} delay={i * 80}>
-                <article className="card-glow group flex h-full flex-col rounded-3xl border border-slate-800 bg-slate-900/70 p-5 transition hover:-translate-y-1 hover:border-cyan-400/50">
+                <article className="card-glow group flex h-full flex-col rounded-3xl border border-line bg-surface/70 p-5 transition hover:-translate-y-1 hover:border-accent/50">
                   {post.cover_image_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={post.cover_image_url} alt={post.title} className="mb-5 h-44 w-full rounded-2xl bg-slate-950 object-contain" />
+                    <img src={post.cover_image_url} alt={post.title} className="mb-5 h-44 w-full rounded-2xl bg-surface-2 object-contain" />
                   ) : (
-                    <div className="mb-5 flex h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 text-slate-600">
+                    <div className="mb-5 flex h-44 items-center justify-center rounded-2xl bg-gradient-to-br from-surface to-surface-2 text-faint">
                       <svg className="h-10 w-10 opacity-30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                         <polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" />
@@ -327,15 +327,15 @@ export default async function Home() {
                     </div>
                   )}
 
-                  <h3 className="text-xl font-semibold text-white transition group-hover:text-cyan-300">{post.title}</h3>
+                  <h3 className="text-xl font-semibold text-content transition group-hover:text-accent-soft">{post.title}</h3>
 
-                  <p className="mt-3 line-clamp-3 flex-1 text-sm leading-6 text-slate-400">{post.excerpt}</p>
+                  <p className="mt-3 line-clamp-3 flex-1 text-sm leading-6 text-muted">{post.excerpt}</p>
 
                   {post.published_at && (
-                    <p className="mt-4 text-xs text-slate-500">{formatDisplayDate(post.published_at)}</p>
+                    <p className="mt-4 text-xs text-faint">{formatDisplayDate(post.published_at)}</p>
                   )}
 
-                  <Link href={`/blog/${post.slug}`} className="mt-5 inline-block text-sm font-semibold text-cyan-400 transition hover:text-cyan-300">
+                  <Link href={`/blog/${post.slug}`} className="mt-5 inline-block text-sm font-semibold text-accent-soft transition hover:text-accent-soft">
                     Read post →
                   </Link>
                 </article>
@@ -348,7 +348,7 @@ export default async function Home() {
       {/* ── HIRE ME + ARCHITECTURE ──────────────────────────────── */}
       <section className="mx-auto grid max-w-7xl gap-6 px-6 py-10 md:grid-cols-2 md:items-start">
         <ScrollReveal>
-          <div className="flex flex-col rounded-3xl border border-cyan-400/20 bg-gradient-to-br from-slate-900 via-slate-900 to-cyan-950/30 p-8 shadow-lg shadow-cyan-950/20">
+          <div className="flex flex-col rounded-3xl border border-accent/20 bg-gradient-to-br from-surface to-surface-2 p-8 shadow-lg shadow-black/10">
             {/* Availability status */}
             <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
               <span className="relative flex h-2 w-2">
@@ -358,25 +358,25 @@ export default async function Home() {
               Available for opportunities
             </div>
 
-            <p className="text-sm uppercase tracking-widest text-cyan-400">Hire Me</p>
-            <h2 className="mt-3 text-3xl font-bold text-white">
+            <p className="text-sm uppercase tracking-widest text-accent-soft">Hire Me</p>
+            <h2 className="mt-3 text-3xl font-bold text-content">
               Want to work together?
             </h2>
-            <p className="mt-5 leading-8 text-slate-400">
+            <p className="mt-5 leading-8 text-muted">
               I&apos;m looking for opportunities to build real things — backend systems,
               cloud infrastructure, full-stack projects, or anything in between.
             </p>
 
             {/* What I'm open to */}
             <div className="mt-6">
-              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-slate-500">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-faint">
                 Open to
               </p>
               <div className="flex flex-wrap gap-2">
                 {["Internships", "Freelance", "Collaboration", "Full-time"].map((item) => (
                   <span
                     key={item}
-                    className="rounded-full border border-slate-700 bg-slate-950/60 px-3 py-1 text-sm text-slate-300"
+                    className="rounded-full border border-line bg-surface-2/60 px-3 py-1 text-sm text-muted"
                   >
                     {item}
                   </span>
@@ -387,8 +387,8 @@ export default async function Home() {
             {/* Meta + CTAs */}
             <div className="mt-8">
               {profile?.location && (
-                <p className="mb-5 flex items-center gap-2 text-sm text-slate-400">
-                  {/* <svg className="h-4 w-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <p className="mb-5 flex items-center gap-2 text-sm text-muted">
+                  {/* <svg className="h-4 w-4 text-accent-soft" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                     <circle cx="12" cy="10" r="3" />
                   </svg> */}
@@ -399,7 +399,7 @@ export default async function Home() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/hire-me"
-                  className="inline-block rounded-xl bg-cyan-400 px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-300"
+                  className="inline-block rounded-xl bg-accent px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-accent-soft"
                 >
                   Send Hiring Inquiry →
                 </Link>
@@ -407,7 +407,7 @@ export default async function Home() {
                 {profile?.email && (
                   <a
                     href={`mailto:${profile.email}`}
-                    className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900/70 px-5 py-3 font-semibold text-slate-200 transition hover:border-cyan-400 hover:text-cyan-300"
+                    className="inline-flex items-center gap-2 rounded-xl border border-line bg-surface/70 px-5 py-3 font-semibold text-content transition hover:border-accent hover:text-accent-soft"
                   >
                     <EmailIcon className="h-4 w-4" /> Email me
                   </a>
@@ -418,11 +418,11 @@ export default async function Home() {
         </ScrollReveal>
 
         <ScrollReveal delay={100}>
-          <div className="h-full rounded-3xl border border-slate-800 bg-slate-900/70 p-8">
-            <p className="text-sm uppercase tracking-widest text-cyan-400">Architecture</p>
-            <h2 className="mt-4 text-3xl font-bold text-white">See how this project is built.</h2>
+          <div className="h-full rounded-3xl border border-line bg-surface/70 p-8">
+            <p className="text-sm uppercase tracking-widest text-accent-soft">Architecture</p>
+            <h2 className="mt-4 text-3xl font-bold text-content">See how this project is built.</h2>
             {profile?.architecture_description && (
-              <p className="mt-3 leading-7 text-slate-400">{profile.architecture_description}</p>
+              <p className="mt-3 leading-7 text-muted">{profile.architecture_description}</p>
             )}
             <div className="mt-5">
               <ArchitectureDiagram />

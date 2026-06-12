@@ -76,10 +76,10 @@ export default function AnimatedHeroText({ roles }: Props) {
       </span>
 
       {/* Typed text with prefix */}
-      <p className="text-xl text-slate-300 md:text-2xl">
+      <p className="text-xl text-muted md:text-2xl">
         I am {article}{" "}
-        <span className="font-semibold text-white">{displayText}</span>
-        <span className="ml-0.5 animate-pulse text-cyan-400">|</span>
+        <span className="font-semibold text-content">{displayText}</span>
+        <span className="ml-0.5 animate-pulse text-accent-soft">|</span>
       </p>
     </div>
   );

@@ -42,13 +42,13 @@ export default function InfoSlider({
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-10">
-      <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-6 md:p-8">
+      <div className="rounded-3xl border border-line bg-surface/70 p-6 md:p-8">
         <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
-            <p className="text-sm uppercase tracking-widest text-cyan-400">
+            <p className="text-sm uppercase tracking-widest text-accent-soft">
               {label}
             </p>
-            <h2 className="mt-3 text-3xl font-bold text-white">{heading}</h2>
+            <h2 className="mt-3 text-3xl font-bold text-content">{heading}</h2>
           </div>
 
           {hasItems && items.length > 1 && (
@@ -56,7 +56,7 @@ export default function InfoSlider({
               <button
                 type="button"
                 onClick={goToPrevious}
-                className="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2 text-sm text-slate-300 transition hover:border-cyan-400 hover:text-cyan-300"
+                className="rounded-xl border border-line bg-surface-2 px-4 py-2 text-sm text-muted transition hover:border-accent hover:text-accent-soft"
               >
                 ❮ 
               </button>
@@ -64,7 +64,7 @@ export default function InfoSlider({
               <button
                 type="button"
                 onClick={goToNext}
-                className="rounded-xl border border-slate-700 bg-slate-950 px-4 py-2 text-sm text-slate-300 transition hover:border-cyan-400 hover:text-cyan-300"
+                className="rounded-xl border border-line bg-surface-2 px-4 py-2 text-sm text-muted transition hover:border-accent hover:text-accent-soft"
               >
                  ❯
               </button>
@@ -73,10 +73,10 @@ export default function InfoSlider({
         </div>
 
         {currentItem ? (
-          <article className="rounded-2xl border border-slate-800 bg-slate-950/70 p-6">
+          <article className="rounded-2xl border border-line bg-surface-2/70 p-6">
             <div className="flex flex-col justify-between gap-4 md:flex-row md:items-start">
               <div>
-                <h3 className="text-xl font-semibold text-white">
+                <h3 className="text-xl font-semibold text-content">
                   {currentItem.title}
                 </h3>
 
@@ -84,14 +84,14 @@ export default function InfoSlider({
               </div>
 
               {currentItem.meta && (
-                <p className="rounded-full border border-slate-700 px-4 py-2 text-sm text-slate-400">
+                <p className="rounded-full border border-line px-4 py-2 text-sm text-muted">
                   {currentItem.meta}
                 </p>
               )}
             </div>
 
             {currentItem.description && (
-              <p className="mt-5 whitespace-pre-line leading-8 text-slate-400">
+              <p className="mt-5 whitespace-pre-line leading-8 text-muted">
                 {currentItem.description}
               </p>
             )}
@@ -105,8 +105,8 @@ export default function InfoSlider({
                     onClick={() => setCurrentIndex(index)}
                     className={`h-2.5 rounded-full transition ${
                       index === currentIndex
-                        ? "w-8 bg-cyan-400"
-                        : "w-2.5 bg-slate-700 hover:bg-slate-500"
+                        ? "w-8 bg-accent"
+                        : "w-2.5 bg-line hover:bg-faint"
                     }`}
                     aria-label={`Show item ${index + 1}`}
                   />
@@ -115,7 +115,7 @@ export default function InfoSlider({
             )}
           </article>
         ) : (
-          <div className="rounded-2xl border border-slate-800 bg-slate-950/70 p-6 text-slate-400">
+          <div className="rounded-2xl border border-line bg-surface-2/70 p-6 text-muted">
             {emptyMessage}
           </div>
         )}

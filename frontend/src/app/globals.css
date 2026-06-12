@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
+/* ─── Theme tokens (dark is the default) ────────────────────── */
 :root {
-  --background: #020617;
-  --foreground: #e2e8f0;
+  --bg: #020617;          /* page background            */
+  --surface: #0f172a;     /* card background            */
+  --surface-2: #020617;   /* nested / inset background  */
+  --line: #1e293b;        /* borders                    */
+  --content: #ffffff;     /* primary text               */
+  --muted: #94a3b8;       /* secondary text             */
+  --faint: #64748b;       /* tertiary text              */
+  --accent: #22d3ee;      /* solid fills (buttons)      */
+  --accent-soft: #67e8f9; /* accent text/labels         */
+
+  /* Decorative hero glows */
+  --glow-1: rgba(14, 165, 233, 0.16);
+  --glow-2: rgba(124, 58, 237, 0.12);
+  --glow-3: rgba(15, 23, 42, 0.95);
+}
+
+/* ─── Light theme overrides ─────────────────────────────────── */
+html.light {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
+  --line: #e2e8f0;
+  --content: #0f172a;
+  --muted: #475569;
+  --faint: #64748b;
+  --accent: #06b6d4;
+  --accent-soft: #0e7490;
+
+  --glow-1: rgba(14, 165, 233, 0.10);
+  --glow-2: rgba(124, 58, 237, 0.08);
+  --glow-3: rgba(241, 245, 249, 0.6);
+}
+
+/* Expose tokens as Tailwind color utilities (bg-surface, text-content, …) */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-content: var(--content);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
 }
 
 html {
   scroll-behavior: smooth;
   /* Fills the overscroll / zoom-out area so it never shows white */
-  background-color: var(--background);
+  background-color: var(--bg);
   /* Prevent stray decorative elements from creating horizontal scroll */
   overflow-x: hidden;
 }
 
 body {
-  background-color: var(--background);
+  background-color: var(--bg);
   background-image:
-    radial-gradient(circle at top left, rgba(14, 165, 233, 0.16), transparent 35%),
-    radial-gradient(circle at top right, rgba(124, 58, 237, 0.12), transparent 30%),
-    radial-gradient(circle at bottom, rgba(15, 23, 42, 0.95), #020617 55%);
-  color: var(--foreground);
+    radial-gradient(circle at top left, var(--glow-1), transparent 35%),
+    radial-gradient(circle at top right, var(--glow-2), transparent 30%),
+    radial-gradient(circle at bottom, var(--glow-3), var(--bg) 55%);
+  color: var(--content);
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {

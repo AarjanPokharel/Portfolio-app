@@ -9,11 +9,11 @@ type FooterProps = {
 export default function Footer({ profile }: FooterProps) {
   return (
     <footer className="mx-auto max-w-7xl px-6 py-12">
-      <div className="rounded-3xl border border-slate-800 bg-slate-900/70 p-8">
+      <div className="rounded-3xl border border-line bg-surface/70 p-8">
         <div className="grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-center">
           <div>
-            <h2 className="text-2xl font-bold text-white">{profile?.full_name || "Aarjan Pokharel"}</h2>
-            <p className="mt-3 max-w-xl leading-7 text-slate-400">
+            <h2 className="text-2xl font-bold text-content">{profile?.full_name || "Aarjan Pokharel"}</h2>
+            <p className="mt-3 max-w-xl leading-7 text-muted">
               Cloud-native portfolio built with Django REST Framework, Next.js,
               PostgreSQL, Docker, and AWS.
             </p>
@@ -26,7 +26,7 @@ export default function Footer({ profile }: FooterProps) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="GitHub"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-800 bg-slate-950 text-slate-400 transition hover:border-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300"
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface-2 text-muted transition hover:border-accent hover:bg-accent/10 hover:text-accent-soft"
               >
                 <GitHubIcon className="h-5 w-5" />
               </a>
@@ -38,7 +38,7 @@ export default function Footer({ profile }: FooterProps) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-800 bg-slate-950 text-slate-400 transition hover:border-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300"
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface-2 text-muted transition hover:border-accent hover:bg-accent/10 hover:text-accent-soft"
               >
                 <LinkedInIcon className="h-5 w-5" />
               </a>
@@ -48,7 +48,7 @@ export default function Footer({ profile }: FooterProps) {
               <a
                 href={`mailto:${profile.email}`}
                 aria-label="Email"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-800 bg-slate-950 text-slate-400 transition hover:border-cyan-400 hover:bg-cyan-400/10 hover:text-cyan-300"
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface-2 text-muted transition hover:border-accent hover:bg-accent/10 hover:text-accent-soft"
               >
                 <EmailIcon className="h-5 w-5" />
               </a>
@@ -60,7 +60,7 @@ export default function Footer({ profile }: FooterProps) {
                 target="_blank"
                 rel="noreferrer"
                 download
-                className="rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm font-semibold text-slate-300 transition hover:border-cyan-400 hover:text-cyan-300"
+                className="rounded-xl border border-line bg-surface-2 px-4 py-3 text-sm font-semibold text-muted transition hover:border-accent hover:text-accent-soft"
               >
                 Resume ↓
               </a>
@@ -68,14 +68,14 @@ export default function Footer({ profile }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col justify-between gap-4 border-t border-slate-800 pt-6 text-sm text-slate-500 md:flex-row">
+        <div className="mt-8 flex flex-col justify-between gap-4 border-t border-line pt-6 text-sm text-faint md:flex-row">
           <p>© {new Date().getFullYear()} {profile?.full_name || "Aarjan Pokharel"}. All rights reserved.</p>
 
           <div className="flex flex-wrap gap-4">
-            <Link href="/" className="transition hover:text-cyan-300">Home</Link>
-            <Link href="/blog" className="transition hover:text-cyan-300">Blog</Link>
-            <Link href="/hire-me" className="transition hover:text-cyan-300">Hire Me</Link>
-            <Link href="/contact" className="transition hover:text-cyan-300">Contact</Link>
+            <Link href="/" className="transition hover:text-accent-soft">Home</Link>
+            <Link href="/blog" className="transition hover:text-accent-soft">Blog</Link>
+            <Link href="/hire-me" className="transition hover:text-accent-soft">Hire Me</Link>
+            <Link href="/contact" className="transition hover:text-accent-soft">Contact</Link>
           </div>
         </div>
       </div>
