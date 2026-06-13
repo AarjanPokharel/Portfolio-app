@@ -347,8 +347,8 @@ export default async function Home() {
 
       {/* ── HIRE ME + ARCHITECTURE ──────────────────────────────── */}
       <section className="mx-auto grid max-w-7xl gap-6 px-6 py-10 md:grid-cols-2 md:items-start">
-        <ScrollReveal>
-          <div className="flex flex-col rounded-3xl border border-accent/20 bg-gradient-to-br from-surface to-surface-2 p-8 shadow-lg shadow-black/10">
+        <ScrollReveal className="min-w-0">
+          <div className="flex flex-col rounded-3xl border border-accent/20 bg-gradient-to-br from-surface to-surface-2 p-6 shadow-lg shadow-black/10 sm:p-8">
             {/* Availability status */}
             <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
               <span className="relative flex h-2 w-2">
@@ -417,15 +417,18 @@ export default async function Home() {
           </div>
         </ScrollReveal>
 
-        <ScrollReveal delay={100}>
-          <div className="h-full rounded-3xl border border-line bg-surface/70 p-8">
+        <ScrollReveal delay={100} className="min-w-0">
+          <div className="h-full rounded-3xl border border-line bg-surface/70 p-6 sm:p-8">
             <p className="text-sm uppercase tracking-widest text-accent-soft">Architecture</p>
             <h2 className="mt-4 text-3xl font-bold text-content">See how this project is built.</h2>
             {profile?.architecture_description && (
               <p className="mt-3 leading-7 text-muted">{profile.architecture_description}</p>
             )}
-            <div className="mt-5">
-              <ArchitectureDiagram />
+            {/* Scrolls horizontally within the card on small screens instead of overflowing the page */}
+            <div className="mt-5 -mx-2 overflow-x-auto px-2">
+              <div className="min-w-[300px]">
+                <ArchitectureDiagram />
+              </div>
             </div>
           </div>
         </ScrollReveal>
