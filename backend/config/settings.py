@@ -184,6 +184,11 @@ CSRF_TRUSTED_ORIGINS = config(
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 USE_X_FORWARDED_HOST = True
 
+# ─── FastAPI notification microservice ───────────────────────────────────
+# Internal Docker URL (service name), and the shared secret both sides use.
+NOTIFICATION_SERVICE_URL = config('NOTIFICATION_SERVICE_URL', default='')
+INTERNAL_API_TOKEN = config('INTERNAL_API_TOKEN', default='')
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
