@@ -34,6 +34,9 @@ services:
       DB_PASSWORD: ${POSTGRES_PASSWORD:-arp_password}
       DB_HOST: postgres-db
       DB_PORT: 5432
+      # Talk to the FastAPI microservice over the internal Docker network
+      NOTIFICATION_SERVICE_URL: http://notification-service:8001
+      INTERNAL_API_TOKEN: ${INTERNAL_API_TOKEN}
     volumes:
       - ./backend:/app
 
@@ -49,6 +52,26 @@ services:
     environment:
       INTERNAL_API_URL: http://backend:8000
       NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-https://workwithaarjan.dev}
+
+  notification-service:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      APP_ENV: ${APP_ENV:-production}
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      SMTP_FROM: ${SMTP_FROM}
+      SMTP_USE_TLS: ${SMTP_USE_TLS:-true}
+      SMTP_USE_SSL: ${SMTP_USE_SSL:-false}
+      NOTIFY_TO_EMAIL: ${NOTIFY_TO_EMAIL}
+      INTERNAL_API_TOKEN: ${INTERNAL_API_TOKEN}
+    # Internal only — no `ports:`, so it is NOT reachable from the public internet.
+    expose:
+      - "8001"
 
   nginx:
     image: nginx:alpine
