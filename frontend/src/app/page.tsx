@@ -284,8 +284,8 @@ export default async function Home() {
                     key={stat.label}
                     className="rounded-2xl border border-line bg-surface-2/80 p-4 text-center transition hover:border-accent/40"
                   >
-                    <p className="text-2xl font-bold text-content">{stat.value}</p>
-                    <p className="mt-1 text-xs text-faint">{stat.label}</p>
+                    <p className="text-xl font-bold text-content">{stat.value}</p>
+                    <p className="mt-1.5 text-xs text-faint">{stat.label}</p>
                   </div>
                 ))}
               </div>
