@@ -14,6 +14,7 @@ export type Profile = {
   email: string;
   linkedin_url: string;
   github_url: string;
+  instagram_url: string;
   profile_image_url: string | null;
   resume_file_url: string | null;
 };
@@ -28,6 +29,22 @@ export type Role = {
   id: number;
   text: string;
   icon: string;
+  display_order: number;
+};
+
+export type Stat = {
+  id: number;
+  value: string;
+  label: string;
+  display_order: number;
+};
+
+export type Involvement = {
+  id: number;
+  title: string;
+  organization: string;
+  period: string;
+  description: string;
   display_order: number;
 };
 
@@ -170,6 +187,14 @@ export async function getServices(): Promise<Service[]> {
 
 export async function getRoles(): Promise<Role[]> {
   return fetchFromApi<Role[]>('/api/portfolio/roles/');
+}
+
+export async function getStats(): Promise<Stat[]> {
+  return fetchFromApi<Stat[]>('/api/portfolio/stats/');
+}
+
+export async function getInvolvements(): Promise<Involvement[]> {
+  return fetchFromApi<Involvement[]>('/api/portfolio/involvements/');
 }
 
 export async function sendContactMessage(

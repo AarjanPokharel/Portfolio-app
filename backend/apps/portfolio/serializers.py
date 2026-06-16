@@ -1,7 +1,7 @@
 #portfolio
 
 from rest_framework import serializers
-from .models import Education, Experience, Profile, Project, Role, Service, Skill
+from .models import Education, Experience, Involvement, Profile, Project, Role, Service, Skill, Stat
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -21,6 +21,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             'email',
             'linkedin_url',
             'github_url',
+            'instagram_url',
             'profile_image_url',
             'resume_file_url',
             'created_at',
@@ -130,6 +131,18 @@ class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
         fields = ['id', 'text', 'icon', 'display_order']
+
+
+class StatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stat
+        fields = ['id', 'value', 'label', 'display_order']
+
+
+class InvolvementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Involvement
+        fields = ['id', 'title', 'organization', 'period', 'description', 'display_order']
 
 
 class ServiceSerializer(serializers.ModelSerializer):

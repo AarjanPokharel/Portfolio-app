@@ -35,6 +35,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
@@ -44,7 +45,7 @@ export default async function RootLayout({
             __html: `(function(){try{if(localStorage.getItem('theme')==='light'){document.documentElement.classList.add('light');}}catch(e){}})();`,
           }}
         />
-        <Navbar name={profile?.full_name} />
+        <Navbar name={profile?.full_name} email={profile?.email} />
         {children}
       </body>
     </html>

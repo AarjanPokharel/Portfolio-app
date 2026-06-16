@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
+import { EmailIcon } from "./Icons";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -11,10 +12,9 @@ const navLinks = [
   { href: "/#about", label: "About" },
   { href: "/#projects", label: "Projects" },
   { href: "/blog", label: "Blog" },
-  { href: "/contact", label: "Contact" },
 ];
 
-export default function Navbar({ name }: { name?: string }) {
+export default function Navbar({ name, email }: { name?: string; email?: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -65,12 +65,23 @@ export default function Navbar({ name }: { name?: string }) {
           {/* Theme toggle */}
           <ThemeToggle />
 
-          {/* Hire Me — desktop */}
+          {/* Email me — desktop */}
+          {email && (
+            <a
+              href={`mailto:${email}`}
+              aria-label="Email me"
+              className="hidden items-center gap-2 rounded-full border border-line px-4 py-2 text-sm font-semibold text-muted transition hover:border-accent hover:text-accent-soft md:inline-flex"
+            >
+              <EmailIcon className="h-4 w-4" /> Email me
+            </a>
+          )}
+
+          {/* Contact — desktop */}
           <Link
-            href="/hire-me"
+            href="/contact"
             className="hidden rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent-soft transition hover:bg-accent hover:text-slate-950 md:block"
           >
-            Hire Me
+            Contact
           </Link>
 
           {/* Hamburger — mobile */}
@@ -115,12 +126,21 @@ export default function Navbar({ name }: { name?: string }) {
                 {link.label}
               </Link>
             ))}
+            {email && (
+              <a
+                href={`mailto:${email}`}
+                className="mt-3 flex items-center justify-center gap-2 rounded-full border border-line px-4 py-2.5 text-center text-sm font-semibold text-muted transition hover:border-accent hover:text-accent-soft"
+                onClick={() => setMenuOpen(false)}
+              >
+                <EmailIcon className="h-4 w-4" /> Email me
+              </a>
+            )}
             <Link
-              href="/hire-me"
-              className="mt-3 rounded-full border border-accent/40 bg-accent/10 px-4 py-2.5 text-center text-sm font-semibold text-accent-soft transition hover:bg-accent hover:text-slate-950"
+              href="/contact"
+              className="mt-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-2.5 text-center text-sm font-semibold text-accent-soft transition hover:bg-accent hover:text-slate-950"
               onClick={() => setMenuOpen(false)}
             >
-              Hire Me
+              Contact
             </Link>
           </div>
         </div>

@@ -22,6 +22,7 @@ class Profile(models.Model):
 
     linkedin_url = models.URLField(blank=True)
     github_url = models.URLField(blank=True)
+    instagram_url = models.URLField(blank=True)
 
     profile_image = models.ImageField(
         upload_to='profile/',
@@ -220,4 +221,45 @@ class Service(models.Model):
 
     def __str__(self):
         return self.get_category_display()
+
+
+class Stat(models.Model):
+    """A single highlight stat shown in the About section (e.g. '5+' / 'Projects')."""
+    value = models.CharField(
+        max_length=20,
+        help_text="The figure to show, e.g. '5+', '2 yrs', 'AWS'."
+    )
+    label = models.CharField(
+        max_length=50,
+        help_text="What it counts, e.g. 'Projects', 'Certifications'."
+    )
+    display_order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['display_order']
+
+    def __str__(self):
+        return f'{self.value} {self.label}'
+
+
+class Involvement(models.Model):
+    """Leadership, volunteering, and community work shown in the 'Beyond the Code' section."""
+    title = models.CharField(max_length=200, help_text="Your role, e.g. 'Teaching Fellow'.")
+    organization = models.CharField(max_length=200, blank=True)
+    period = models.CharField(
+        max_length=100,
+        blank=True,
+        help_text="Free text, e.g. 'Dec 2022' or 'Aug 2020 – Apr 2021'."
+    )
+    description = models.TextField(
+        blank=True,
+        help_text="One point per line — each line renders as a bullet."
+    )
+    display_order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['display_order']
+
+    def __str__(self):
+        return f'{self.title} — {self.organization}'
 

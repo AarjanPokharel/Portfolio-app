@@ -91,9 +91,20 @@ export default function InfoSlider({
             </div>
 
             {currentItem.description && (
-              <p className="mt-5 whitespace-pre-line leading-8 text-muted">
-                {currentItem.description}
-              </p>
+              <ul className="mt-5 space-y-2 text-muted">
+                {currentItem.description
+                  .split("\n")
+                  .map((line) => line.trim())
+                  .filter((line) => line.length > 0)
+                  .map((line, index) => (
+                    <li key={index} className="flex gap-3 leading-7">
+                      <span className="flex h-7 flex-shrink-0 items-center">
+                        <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                      </span>
+                      <span className="text-justify">{line}</span>
+                    </li>
+                  ))}
+              </ul>
             )}
 
             {items.length > 1 && (

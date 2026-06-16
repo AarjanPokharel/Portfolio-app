@@ -5,16 +5,19 @@ import ProjectSlider from "@/components/ProjectSlider";
 import InfoSlider from "@/components/InfoSlider";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
-import { GitHubIcon, LinkedInIcon, EmailIcon, ArrowDownIcon, ExternalLinkIcon } from "@/components/Icons";
+import ContactForm from "@/app/contact/ContactForm";
+import { GitHubIcon, LinkedInIcon, EmailIcon, ArrowDownIcon, ExternalLinkIcon, SkillIcon } from "@/components/Icons";
 import {
   formatDisplayDate,
   getBlogPosts,
   getEducation,
   getExperience,
+  getInvolvements,
   getProfile,
   getProjects,
   getRoles,
   getSkills,
+  getStats,
 } from "@/lib/api";
 
 // Category accent color for the skill label (readable on both light & dark)
@@ -34,7 +37,7 @@ function getSkillColor(category: string): string {
 }
 
 export default async function Home() {
-  const [profile, education, experience, skills, projects, blogPosts, roles] =
+  const [profile, education, experience, skills, projects, blogPosts, roles, stats, involvements] =
     await Promise.all([
       getProfile(),
       getEducation(),
@@ -43,12 +46,25 @@ export default async function Home() {
       getProjects(),
       getBlogPosts(),
       getRoles(),
+      getStats(),
+      getInvolvements(),
     ]);
 
   const featuredProjects = projects.filter((p) => p.featured);
   const displayedProjects = featuredProjects.length > 0 ? featuredProjects : projects;
   const displayedBlogPosts = blogPosts.slice(0, 3);
   const displayedSkills = skills;
+
+  // Backend-driven stats; fall back to sensible computed ones if none are set.
+  const displayedStats =
+    stats.length > 0
+      ? stats.map((s) => ({ value: s.value, label: s.label }))
+      : [
+          { value: projects.length > 0 ? `${projects.length}+` : "0", label: "Projects" },
+          { value: skills.length > 0 ? `${skills.length}+` : "0", label: "Skill Areas" },
+          { value: experience.length > 0 ? `${experience.length}+` : "0", label: "Roles" },
+          { value: education.length > 0 ? `${education.length}` : "0", label: "Degrees" },
+        ];
 
   const experienceSliderItems = experience.map((item) => ({
     id: item.id,
@@ -79,7 +95,9 @@ export default async function Home() {
         <div className="pointer-events-none absolute right-20 top-24 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
         <div className="pointer-events-none absolute bottom-10 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-violet-500/8 blur-3xl" />
 
-        <div className="relative w-full max-w-4xl">
+        <div className="relative grid w-full items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+          {/* LEFT: intro */}
+          <div>
           {/* Status badge */}
           <div className="hero-animate mb-7 inline-flex items-start gap-2 rounded-2xl border border-accent/20 bg-accent/10 px-4 py-2 text-sm text-accent-soft sm:rounded-full sm:items-center" style={{ animationDelay: "0ms" }}>
             <span className="relative mt-1.5 flex h-2 w-2 flex-shrink-0 sm:mt-0">
@@ -166,10 +184,25 @@ export default async function Home() {
               </a>
             )}
           </div>
+          </div>
+
+          {/* RIGHT: Hire-Me form */}
+          <div className="hero-animate w-full min-w-0" style={{ animationDelay: "320ms" }}>
+            <div className="rounded-3xl border border-accent/20 bg-surface/80 p-6 shadow-xl shadow-black/10 backdrop-blur">
+              <p className="text-sm font-semibold uppercase tracking-widest text-accent-soft">Hire Me</p>
+              <h2 className="mt-2 text-2xl font-bold text-content">Let&apos;s build something together</h2>
+              <p className="mt-2 text-sm leading-6 text-muted">
+                Looking for someone to ship real work? Send me a quick note.
+              </p>
+              <div className="mt-5">
+                <ContactForm defaultMessageType="hire_me" defaultSubject="Hire me inquiry" />
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 lg:block">
           <a href="#skills" aria-label="Scroll down" className="flex flex-col items-center gap-1 text-faint transition hover:text-accent-soft">
             <span className="text-xs tracking-widest uppercase">Scroll</span>
             <ArrowDownIcon className="h-4 w-4 animate-bounce-slow" />
@@ -191,9 +224,14 @@ export default async function Home() {
             {displayedSkills.map((skill, i) => (
               <ScrollReveal key={skill.id} delay={i * 60}>
                 <div className="h-full rounded-2xl border border-line bg-surface p-5">
-                  <p className={`mb-3 text-xs font-semibold uppercase tracking-widest ${getSkillColor(skill.category)}`}>
-                    {skill.label}
-                  </p>
+                  <div className={`mb-3 flex items-center gap-2 ${getSkillColor(skill.category)}`}>
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-current/10">
+                      <SkillIcon category={skill.category} className="h-4 w-4" />
+                    </span>
+                    <p className="text-xs font-semibold uppercase tracking-widest">
+                      {skill.label}
+                    </p>
+                  </div>
                   <div className="flex flex-wrap gap-2">
                     {skill.items_list.map((item) => (
                       <span
@@ -234,25 +272,20 @@ export default async function Home() {
             <div>
               <p className="text-sm uppercase tracking-widest text-accent-soft">About Me</p>
 
-              <p className="mt-5 leading-8 text-muted">
+              <p className="mt-5 text-justify leading-8 text-muted">
                 {profile?.about_me ||
                   "I'm a Computer Science student who enjoys building things — from backend APIs and full-stack apps to cloud infrastructure and automation. I like understanding how systems work end to end."}
               </p>
 
-              {/* Stats */}
+              {/* Stats — managed from Django admin (Portfolio → Stats) */}
               <div className="mt-7 grid grid-cols-2 gap-4 md:grid-cols-4">
-                {[
-                  { value: projects.length > 0 ? `${projects.length}+` : "0", label: "Projects" },
-                  { value: skills.length > 0 ? `${skills.length}+` : "0", label: "Technologies" },
-                  { value: "24/7", label: "Learning" },
-                  { value: "🛠", label: "Always Building", isCyan: true },
-                ].map(({ value, label, isCyan }) => (
+                {displayedStats.map((stat) => (
                   <div
-                    key={label}
-                    className="rounded-2xl border border-line bg-surface-2/80 p-4 text-center transition hover:border-line"
+                    key={stat.label}
+                    className="rounded-2xl border border-line bg-surface-2/80 p-4 text-center transition hover:border-accent/40"
                   >
-                    <p className={`text-2xl font-bold ${isCyan ? "text-accent-soft" : "text-content"}`}>{value}</p>
-                    <p className="mt-1 text-xs text-faint">{label}</p>
+                    <p className="text-2xl font-bold text-content">{stat.value}</p>
+                    <p className="mt-1 text-xs text-faint">{stat.label}</p>
                   </div>
                 ))}
               </div>
@@ -345,74 +378,17 @@ export default async function Home() {
         </section>
       )}
 
-      {/* ── HIRE ME + ARCHITECTURE ──────────────────────────────── */}
-      <section className="mx-auto grid max-w-7xl gap-6 px-6 py-10 md:grid-cols-2 md:items-start">
+      {/* ── CONTACT + ARCHITECTURE ──────────────────────────────── */}
+      <section id="contact" className="mx-auto grid max-w-7xl gap-6 px-6 py-10 md:grid-cols-2 md:items-start">
         <ScrollReveal className="min-w-0">
-          <div className="flex flex-col rounded-3xl border border-accent/20 bg-gradient-to-br from-surface to-surface-2 p-6 shadow-lg shadow-black/10 sm:p-8">
-            {/* Availability status */}
-            <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-              </span>
-              Available for opportunities
-            </div>
-
-            <p className="text-sm uppercase tracking-widest text-accent-soft">Hire Me</p>
-            <h2 className="mt-3 text-3xl font-bold text-content">
-              Want to work together?
-            </h2>
-            <p className="mt-5 leading-8 text-muted">
-              I&apos;m looking for opportunities to build real things — backend systems,
-              cloud infrastructure, full-stack projects, or anything in between.
+          <div className="rounded-3xl border border-accent/20 bg-surface/70 p-6 shadow-lg shadow-black/10 sm:p-8">
+            <p className="text-sm uppercase tracking-widest text-accent-soft">Contact</p>
+            <h2 className="mt-3 text-3xl font-bold text-content">Send me a message</h2>
+            <p className="mt-3 text-justify leading-7 text-muted">
+              Have a role, a project, or just a question? Drop me a note and I&apos;ll get back to you.
             </p>
-
-            {/* What I'm open to */}
             <div className="mt-6">
-              <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-faint">
-                Open to
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {["Internships", "Freelance", "Collaboration", "Full-time"].map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-line bg-surface-2/60 px-3 py-1 text-sm text-muted"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Meta + CTAs */}
-            <div className="mt-8">
-              {profile?.location && (
-                <p className="mb-5 flex items-center gap-2 text-sm text-muted">
-                  {/* <svg className="h-4 w-4 text-accent-soft" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                    <circle cx="12" cy="10" r="3" />
-                  </svg> */}
-                  {/* Based in {profile.location} */}
-                </p>
-              )}
-
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href="/hire-me"
-                  className="inline-block rounded-xl bg-accent px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-accent-soft"
-                >
-                  Send Hiring Inquiry →
-                </Link>
-
-                {profile?.email && (
-                  <a
-                    href={`mailto:${profile.email}`}
-                    className="inline-flex items-center gap-2 rounded-xl border border-line bg-surface/70 px-5 py-3 font-semibold text-content transition hover:border-accent hover:text-accent-soft"
-                  >
-                    <EmailIcon className="h-4 w-4" /> Email me
-                  </a>
-                )}
-              </div>
+              <ContactForm />
             </div>
           </div>
         </ScrollReveal>
@@ -422,7 +398,7 @@ export default async function Home() {
             <p className="text-sm uppercase tracking-widest text-accent-soft">Architecture</p>
             <h2 className="mt-4 text-3xl font-bold text-content">See how this project is built.</h2>
             {profile?.architecture_description && (
-              <p className="mt-3 leading-7 text-muted">{profile.architecture_description}</p>
+              <p className="mt-3 text-justify leading-7 text-muted">{profile.architecture_description}</p>
             )}
             {/* Scrolls horizontally within the card on small screens instead of overflowing the page */}
             <div className="mt-5 -mx-2 overflow-x-auto px-2">
@@ -433,6 +409,57 @@ export default async function Home() {
           </div>
         </ScrollReveal>
       </section>
+
+      {/* ── BEYOND THE CODE ─────────────────────────────────────── */}
+      {involvements.length > 0 && (
+        <section className="mx-auto max-w-7xl px-6 py-16">
+          <ScrollReveal>
+            <div className="mb-8">
+              <p className="text-sm uppercase tracking-widest text-accent-soft">Beyond the Code</p>
+              <h2 className="mt-3 text-3xl font-bold text-content">Leadership &amp; community</h2>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {involvements.map((item, i) => (
+              <ScrollReveal key={item.id} delay={i * 80}>
+                <div className="h-full rounded-3xl border border-line bg-surface/70 p-6 sm:p-8">
+                  <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-start">
+                    <div>
+                      <h3 className="text-xl font-semibold text-content">{item.title}</h3>
+                      {item.organization && (
+                        <p className="mt-1 font-medium text-accent-soft">{item.organization}</p>
+                      )}
+                    </div>
+                    {item.period && (
+                      <p className="rounded-full border border-line px-3 py-1 text-xs text-faint">
+                        {item.period}
+                      </p>
+                    )}
+                  </div>
+
+                  {item.description && (
+                    <ul className="mt-5 space-y-2 text-muted">
+                      {item.description
+                        .split("\n")
+                        .map((line) => line.trim())
+                        .filter((line) => line.length > 0)
+                        .map((line, index) => (
+                          <li key={index} className="flex gap-3 leading-7">
+                            <span className="flex h-7 flex-shrink-0 items-center">
+                              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                            </span>
+                            <span className="text-justify">{line}</span>
+                          </li>
+                        ))}
+                    </ul>
+                  )}
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ── FOOTER ──────────────────────────────────────────────── */}
       <Footer profile={profile} />
