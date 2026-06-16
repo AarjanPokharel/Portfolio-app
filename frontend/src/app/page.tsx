@@ -70,6 +70,7 @@ export default async function Home() {
     id: item.id,
     title: item.job_title,
     subtitle: item.company_name,
+    location: item.location,
     meta: `${formatDisplayDate(item.start_date)} – ${item.currently_working ? "Present" : formatDisplayDate(item.end_date)}`,
     description: item.description,
   }));
@@ -78,6 +79,7 @@ export default async function Home() {
     id: item.id,
     title: item.school_name,
     subtitle: `${item.degree}${item.field_of_study ? `, ${item.field_of_study}` : ""}`,
+    location: item.location,
     meta: `${formatDisplayDate(item.start_date)} – ${formatDisplayDate(item.end_date)}`,
     description: item.description,
   }));
