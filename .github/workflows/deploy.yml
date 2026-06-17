@@ -4,6 +4,12 @@ name: Deploy to Production
 on:
   push:
     branches: [main]
+    # Skip the pipeline for changes that don't affect the running app
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.gitignore'
+      - 'LICENSE'
 
 jobs:
   # Job 1: Quick Sanity check
