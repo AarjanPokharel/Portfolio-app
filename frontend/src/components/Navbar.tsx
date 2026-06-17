@@ -40,9 +40,12 @@ export default function Navbar({ name, email }: { name?: string; email?: string 
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/15 text-sm font-bold text-accent-soft ring-1 ring-accent/30 transition group-hover:bg-accent/25 group-hover:ring-accent/60">
-            AP
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.png"
+            alt={name || "Logo"}
+            className="h-9 w-9 rounded-full object-contain ring-1 ring-accent/30 transition group-hover:scale-105 group-hover:ring-accent/60"
+          />
           <p className="text-sm font-bold tracking-wide text-content">
             {name || "Aarjan Pokharel"}
           </p>
