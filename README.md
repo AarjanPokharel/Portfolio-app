@@ -2,7 +2,7 @@
 
 [![Deploy to Production](https://github.com/AarjanPokharel/Portfolio-app/actions/workflows/deploy.yml/badge.svg)](https://github.com/AarjanPokharel/Portfolio-app/actions/workflows/deploy.yml)
 
-A cloud-native personal portfolio, built and deployed end to end as a production system — not a static page.
+A cloud-native personal portfolio, built and deployed end to end as a production system and not just a static page.
 
 🔗 **Live:** [workwithaarjan.dev](https://workwithaarjan.dev)
 
@@ -31,8 +31,6 @@ All services run as containers on a single AWS EC2 instance, orchestrated with D
 
 ## Screenshots
 
-> Place images in `docs/screenshots/` and they'll render below.
-
 | Home (dark) | Home (light) |
 |-------------|--------------|
 | ![Home dark](docs/screenshots/home-dark.png) | ![Home light](docs/screenshots/home-light.png) |
@@ -60,12 +58,12 @@ All services run as containers on a single AWS EC2 instance, orchestrated with D
 
 ## Features
 
-- **Fully backend-driven content** — profile, projects, skills, experience, education, stats, services, leadership/community, blog posts, and About photos are all managed through the Django admin; the frontend renders whatever the API returns.
+- **Fully backend-driven content**: profile, projects, skills, experience, education, stats, services, leadership/community, blog posts, and About photos are all managed through the Django admin; the frontend renders whatever the API returns.
 - **Light / dark theme** toggle with no-flash SSR and persisted preference.
-- **Animated, responsive architecture diagram** built in code (not an image), with live data-flow animation.
-- **Contact form → FastAPI notification service** — submissions are stored in PostgreSQL and trigger an email notification, sent asynchronously so the request never blocks.
+- **Animated, responsive architecture diagram**: built in code (not an image), with live data-flow animation.
+- **Contact form → FastAPI notification service**: submissions are stored in PostgreSQL and trigger an email notification, sent asynchronously so the request never blocks.
 - **HEIC auto-conversion** for uploaded photos.
-- **Automated deployments** — push to `main`, approve in GitHub Actions, and the pipeline pulls, rebuilds, migrates, and restarts services on the server.
+- **Automated deployments**: push to `main`, approve in GitHub Actions, and the pipeline pulls, rebuilds, migrates, and restarts services on the server.
 
 ---
 
@@ -166,7 +164,7 @@ Deployments are automated via **GitHub Actions** (`.github/workflows/deploy.yml`
 1. Push to `main`
 2. The pipeline runs sanity checks
 3. The deploy job **pauses for manual approval** (GitHub Environments)
-4. On approval, it SSHes into EC2, pulls the latest code, rebuilds the containers, runs migrations, collects static files, and reloads Nginx
+4. On approval, it performs SSH into EC2, pulls the latest code, rebuilds the containers, runs migrations, collects static files, and reloads Nginx
 
 ---
 
