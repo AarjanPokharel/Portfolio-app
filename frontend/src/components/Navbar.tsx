@@ -44,7 +44,7 @@ export default function Navbar({ name, email }: { name?: string; email?: string 
           <img
             src="/logo.png"
             alt={name || "Logo"}
-            className="h-9 w-9 rounded-full object-contain ring-1 ring-accent/30 transition group-hover:scale-105 group-hover:ring-accent/60"
+            className="h-10 w-10 rounded-full object-contain transition group-hover:scale-105"
           />
           <p className="text-sm font-bold tracking-wide text-content">
             {name || "Aarjan Pokharel"}
