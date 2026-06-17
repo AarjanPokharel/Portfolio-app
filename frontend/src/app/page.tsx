@@ -6,12 +6,14 @@ import InfoSlider from "@/components/InfoSlider";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import ContactForm from "@/app/contact/ContactForm";
+import AboutGallery from "@/components/AboutGallery";
 import { GitHubIcon, LinkedInIcon, EmailIcon, ArrowDownIcon, ExternalLinkIcon, SkillIcon } from "@/components/Icons";
 import {
   formatDisplayDate,
   getBlogPosts,
   getEducation,
   getExperience,
+  getAboutPhotos,
   getInvolvements,
   getProfile,
   getProjects,
@@ -37,7 +39,7 @@ function getSkillColor(category: string): string {
 }
 
 export default async function Home() {
-  const [profile, education, experience, skills, projects, blogPosts, roles, stats, involvements] =
+  const [profile, education, experience, skills, projects, blogPosts, roles, stats, involvements, aboutPhotos] =
     await Promise.all([
       getProfile(),
       getEducation(),
@@ -48,7 +50,16 @@ export default async function Home() {
       getRoles(),
       getStats(),
       getInvolvements(),
+      getAboutPhotos(),
     ]);
+
+  // Build the About gallery slides — uploaded gallery photos, else fall back to the single profile image
+  const aboutSlides = aboutPhotos
+    .filter((p) => p.image_url)
+    .map((p) => ({ src: p.image_url as string, caption: p.caption }));
+  if (aboutSlides.length === 0 && profile?.profile_image_url) {
+    aboutSlides.push({ src: profile.profile_image_url, caption: "" });
+  }
 
   const featuredProjects = projects.filter((p) => p.featured);
   const displayedProjects = featuredProjects.length > 0 ? featuredProjects : projects;
@@ -255,21 +266,14 @@ export default async function Home() {
       <section id="about" className="mx-auto max-w-7xl px-6 py-20">
         <ScrollReveal>
           <div className="grid gap-8 rounded-3xl border border-line bg-surface/70 p-6 md:grid-cols-[0.75fr_1.25fr] md:p-8">
-            {/* Profile image */}
-            <div className="overflow-hidden rounded-2xl border border-line bg-surface-2">
-              {profile?.profile_image_url ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={profile.profile_image_url}
-                  alt={profile.full_name}
-                  className="h-full min-h-[280px] w-full object-cover transition duration-500 hover:scale-105"
-                />
-              ) : (
-                <div className="flex min-h-[280px] items-center justify-center text-faint">
-                  No photo added yet
-                </div>
-              )}
-            </div>
+            {/* Profile photo carousel */}
+            {aboutSlides.length > 0 ? (
+              <AboutGallery photos={aboutSlides} />
+            ) : (
+              <div className="flex min-h-[280px] items-center justify-center rounded-2xl border border-line bg-surface-2 text-faint">
+                No photo added yet
+              </div>
+            )}
 
             <div>
               <p className="text-sm uppercase tracking-widest text-accent-soft">About Me</p>

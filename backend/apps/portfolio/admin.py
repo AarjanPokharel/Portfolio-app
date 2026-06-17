@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Project, Role, Service, Skill, Stat, Involvement, Education, Experience
+from .models import AboutPhoto, Profile, Project, Role, Service, Skill, Stat, Involvement, Education, Experience
 
 # Register your models here.
 
@@ -61,4 +61,11 @@ class InvolvementAdmin(admin.ModelAdmin):
     list_display = ('title', 'organization', 'period', 'display_order')
     list_editable = ('display_order',)
     search_fields = ('title', 'organization')
+    ordering = ('display_order',)
+
+
+@admin.register(AboutPhoto)
+class AboutPhotoAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'caption', 'display_order')
+    list_editable = ('display_order',)
     ordering = ('display_order',)

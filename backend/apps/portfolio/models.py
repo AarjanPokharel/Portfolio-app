@@ -242,6 +242,19 @@ class Stat(models.Model):
         return f'{self.value} {self.label}'
 
 
+class AboutPhoto(models.Model):
+    """Photos shown as a carousel in the About Me section."""
+    image = models.ImageField(upload_to='about/')
+    caption = models.CharField(max_length=150, blank=True)
+    display_order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['display_order']
+
+    def __str__(self):
+        return self.caption or f'About photo #{self.pk}'
+
+
 class Involvement(models.Model):
     """Leadership, volunteering, and community work shown in the 'Beyond the Code' section."""
     title = models.CharField(max_length=200, help_text="Your role, e.g. 'Teaching Fellow'.")

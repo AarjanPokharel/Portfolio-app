@@ -1,7 +1,7 @@
 #portfolio
 
 from rest_framework import serializers
-from .models import Education, Experience, Involvement, Profile, Project, Role, Service, Skill, Stat
+from .models import AboutPhoto, Education, Experience, Involvement, Profile, Project, Role, Service, Skill, Stat
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -143,6 +143,17 @@ class InvolvementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Involvement
         fields = ['id', 'title', 'organization', 'period', 'description', 'display_order']
+
+
+class AboutPhotoSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = AboutPhoto
+        fields = ['id', 'image_url', 'caption', 'display_order']
+
+    def get_image_url(self, obj):
+        return obj.image.url if obj.image else None
 
 
 class ServiceSerializer(serializers.ModelSerializer):

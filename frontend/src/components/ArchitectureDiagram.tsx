@@ -22,7 +22,7 @@ function Box({
   children?: React.ReactNode;
 }) {
   return (
-    <div className={`min-w-0 flex-1 rounded-xl border ${accent} bg-slate-950/60 p-3`}>
+    <div className={`arch-node min-w-0 flex-1 rounded-xl border ${accent} bg-slate-950/60 p-3`}>
       <div className="flex items-center gap-2">
         {icon && <span className="flex-shrink-0">{icon}</span>}
         <div className="min-w-0">
@@ -35,12 +35,27 @@ function Box({
   );
 }
 
+function FlowDot({ direction }: { direction: "down" | "right" }) {
+  return (
+    <span
+      className={`absolute h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)] ${
+        direction === "down"
+          ? "left-1/2 -translate-x-1/2 animate-flow-down"
+          : "top-1/2 -translate-y-1/2 animate-flow-right"
+      }`}
+    />
+  );
+}
+
 function ArrowDown({ label }: { label: string }) {
   return (
-    <div className="flex flex-col items-center gap-0.5 py-1">
-      <div className="h-4 w-px bg-slate-700" />
-      <span className="rounded-full bg-slate-800 px-2 py-0.5 text-xs text-slate-500">{label}</span>
-      <div className="h-4 w-px bg-slate-700" />
+    <div className="relative flex flex-col items-center py-1">
+      <div className="relative h-9 w-px overflow-visible bg-slate-700">
+        <FlowDot direction="down" />
+        <span className="absolute left-2 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full bg-slate-800 px-2 py-0.5 text-xs text-slate-500">
+          {label}
+        </span>
+      </div>
       <svg width="8" height="6" viewBox="0 0 8 6" fill="none" className="text-slate-600">
         <path d="M4 6L0 0h8L4 6z" fill="currentColor" />
       </svg>
@@ -53,7 +68,9 @@ function ArrowRight({ label }: { label?: string }) {
     <div className="flex flex-shrink-0 flex-col items-center justify-center gap-0.5">
       {label && <span className="text-xs text-slate-600">{label}</span>}
       <div className="flex items-center gap-0.5">
-        <div className="h-px w-6 bg-slate-700" />
+        <div className="relative h-px w-8 bg-slate-700">
+          <FlowDot direction="right" />
+        </div>
         <svg width="6" height="8" viewBox="0 0 6 8" fill="none" className="text-slate-600">
           <path d="M6 4L0 0v8L6 4z" fill="currentColor" />
         </svg>
@@ -122,10 +139,10 @@ export default function ArchitectureDiagram() {
           </div>
 
           {/* Nginx */}
-          <div className="mb-2 rounded-lg border border-emerald-700/40 bg-emerald-950/20 px-3 py-2">
+          <div className="arch-node mb-2 rounded-lg border border-emerald-700/40 bg-emerald-950/20 px-3 py-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
                 <p className="text-xs font-semibold text-emerald-300">Nginx</p>
               </div>
               <div className="flex gap-1">
@@ -149,17 +166,17 @@ export default function ArchitectureDiagram() {
 
           {/* Frontend + Backend side by side */}
           <div className="mb-2 grid grid-cols-2 gap-2">
-            <div className="rounded-lg border border-violet-700/40 bg-violet-950/20 px-3 py-2">
+            <div className="arch-node rounded-lg border border-violet-700/40 bg-violet-950/20 px-3 py-2">
               <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-violet-400" />
+                <span className="h-2 w-2 animate-pulse rounded-full bg-violet-400" />
                 <p className="text-xs font-semibold text-violet-300">Next.js</p>
               </div>
               <p className="mt-1 text-xs text-slate-500">Frontend</p>
             </div>
 
-            <div className="rounded-lg border border-cyan-700/40 bg-cyan-950/20 px-3 py-2">
+            <div className="arch-node rounded-lg border border-cyan-700/40 bg-cyan-950/20 px-3 py-2">
               <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-cyan-400" />
+                <span className="h-2 w-2 animate-pulse rounded-full bg-cyan-400" />
                 <p className="text-xs font-semibold text-cyan-300">Django</p>
               </div>
               <p className="mt-1 text-xs text-slate-500">Backend API</p>
@@ -178,9 +195,9 @@ export default function ArchitectureDiagram() {
 
           {/* PostgreSQL */}
           <div className="flex justify-end">
-            <div className="w-1/2 rounded-lg border border-sky-700/40 bg-sky-950/20 px-3 py-2">
+            <div className="arch-node w-1/2 rounded-lg border border-sky-700/40 bg-sky-950/20 px-3 py-2">
               <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-sky-400" />
+                <span className="h-2 w-2 animate-pulse rounded-full bg-sky-400" />
                 <p className="text-xs font-semibold text-sky-300">PostgreSQL</p>
               </div>
               <p className="mt-1 text-xs text-slate-500">Database</p>
@@ -200,7 +217,7 @@ export default function ArchitectureDiagram() {
       </div>
 
       {/* Domain */}
-      <div className="rounded-xl border border-cyan-700/40 bg-cyan-950/10 px-4 py-3">
+      <div className="arch-node rounded-xl border border-cyan-700/40 bg-cyan-950/10 px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <svg className="h-4 w-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

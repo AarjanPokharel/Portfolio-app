@@ -136,6 +136,37 @@ a {
   animation: fade-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* ─── Architecture diagram: data-flow dots ──────────────────── */
+@keyframes flow-down {
+  0%   { top: -8px;  opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+.animate-flow-down {
+  animation: flow-down 1.7s linear infinite;
+}
+
+@keyframes flow-right {
+  0%   { left: -8px; opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+.animate-flow-right {
+  animation: flow-right 1.7s linear infinite;
+}
+
+/* Hover lift + glow for diagram nodes */
+.arch-node {
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+.arch-node:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.35);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.4);
+}
+
 /* ─── Scroll indicator bounce ───────────────────────────────── */
 @keyframes bounce-slow {
   0%, 100% { transform: translateY(0); }

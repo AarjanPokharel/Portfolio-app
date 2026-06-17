@@ -7,8 +7,9 @@ from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 
-from .models import Education, Experience, Involvement, Profile, Project, Role, Service, Skill, Stat
+from .models import AboutPhoto, Education, Experience, Involvement, Profile, Project, Role, Service, Skill, Stat
 from .serializers import (
+    AboutPhotoSerializer,
     EducationSerializer,
     ExperienceSerializer,
     InvolvementSerializer,
@@ -78,6 +79,11 @@ class StatListAPIView(ListAPIView):
 class InvolvementListAPIView(ListAPIView):
     queryset = Involvement.objects.all()
     serializer_class = InvolvementSerializer
+
+
+class AboutPhotoListAPIView(ListAPIView):
+    queryset = AboutPhoto.objects.all()
+    serializer_class = AboutPhotoSerializer
 
 
 class ServiceListAPIView(ListAPIView):

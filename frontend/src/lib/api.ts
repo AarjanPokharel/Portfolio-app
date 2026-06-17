@@ -48,6 +48,13 @@ export type Involvement = {
   display_order: number;
 };
 
+export type AboutPhoto = {
+  id: number;
+  image_url: string | null;
+  caption: string;
+  display_order: number;
+};
+
 export type Education = {
   id: number;
   school_name: string;
@@ -195,6 +202,10 @@ export async function getStats(): Promise<Stat[]> {
 
 export async function getInvolvements(): Promise<Involvement[]> {
   return fetchFromApi<Involvement[]>('/api/portfolio/involvements/');
+}
+
+export async function getAboutPhotos(): Promise<AboutPhoto[]> {
+  return fetchFromApi<AboutPhoto[]>('/api/portfolio/about-photos/');
 }
 
 export async function sendContactMessage(
