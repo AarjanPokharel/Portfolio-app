@@ -33,3 +33,7 @@ yarn-error.log*
 .DS_Store
 .vscode/
 .idea/
+
+# AI assistant guidance files (kept locally, not tracked)
+CLAUDE.md
+AGENTS.md

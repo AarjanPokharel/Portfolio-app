@@ -114,17 +114,19 @@ export default function ProjectSlider({ projects }: Props) {
               type="button"
               onClick={() => setPage((p) => Math.max(0, p - 1))}
               disabled={page === 0}
+              aria-label="Previous projects"
               className="rounded-xl border border-line bg-surface-2 px-4 py-2 text-sm text-muted transition hover:border-accent hover:text-accent-soft disabled:cursor-not-allowed disabled:opacity-30"
             >
-              ❮ Prev
+              ❮
             </button>
             <button
               type="button"
               onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
               disabled={page === totalPages - 1}
+              aria-label="Next projects"
               className="rounded-xl border border-line bg-surface-2 px-4 py-2 text-sm text-muted transition hover:border-accent hover:text-accent-soft disabled:cursor-not-allowed disabled:opacity-30"
             >
-              Next ❯
+              ❯
             </button>
           </div>
 
