@@ -1,0 +1,45 @@
+name: Deploy to Production
+
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  # Job 1: Quick Sanity check
+  checks:
+    name: Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify project structure
+        run: |
+          test -f backend/manage.py   && echo "✅ backend"
+          test -f frontend/package.json && echo "✅ frontend"
+          test -f compose.yaml        && echo "✅ compose"
+
+  # Job 2: deploy to EC2 (requires approval) 
+  deploy:
+    name: Deploy to EC2
+    needs: checks
+    runs-on: ubuntu-latest
+    environment: production      
+
+    steps:
+      - name: SSH in and deploy
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -e
+            cd ~/app
+            git pull origin main
+            docker compose up -d --build
+            docker compose exec -T backend python manage.py migrate --noinput
+            docker compose exec -T backend python manage.py collectstatic --noinput
+            docker compose restart nginx
+            echo "✅ Deployed at $(date)"
