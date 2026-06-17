@@ -20,7 +20,7 @@ jobs:
           test -f frontend/package.json && echo "✅ frontend"
           test -f compose.yaml        && echo "✅ compose"
 
-  # Job 2: deploy to EC2 (requires approval) 
+  # Job 2: deploy to EC2 
   deploy:
     name: Deploy to EC2
     needs: checks

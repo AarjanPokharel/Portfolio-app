@@ -157,7 +157,7 @@ export default async function Home() {
                   rel="noreferrer"
                   className="rounded-xl border border-line bg-surface/70 px-5 py-3 font-semibold text-content transition hover:border-accent hover:text-accent-soft"
                 >
-                  View Resume
+                  View Resume 
                 </a>
                 {/* Download — saves the PDF */}
                 <a
