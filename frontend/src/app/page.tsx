@@ -149,15 +149,27 @@ export default async function Home() {
             </Link>
 
             {profile?.resume_file_url && (
-              <a
-                href={profile.resume_file_url}
-                target="_blank"
-                rel="noreferrer"
-                download
-                className="rounded-xl border border-line bg-surface/70 px-5 py-3 font-semibold text-content transition hover:border-accent hover:text-accent-soft"
-              >
-                Resume ↓
-              </a>
+              <div className="flex items-stretch gap-2">
+                {/* Preview — opens the PDF in a new tab */}
+                <a
+                  href={profile.resume_file_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-xl border border-line bg-surface/70 px-5 py-3 font-semibold text-content transition hover:border-accent hover:text-accent-soft"
+                >
+                  View Resume ↗
+                </a>
+                {/* Download — saves the PDF */}
+                <a
+                  href={profile.resume_file_url}
+                  download
+                  aria-label="Download resume"
+                  title="Download resume"
+                  className="flex items-center justify-center rounded-xl border border-line bg-surface/70 px-4 text-content transition hover:border-accent hover:text-accent-soft"
+                >
+                  <ArrowDownIcon className="h-5 w-5" />
+                </a>
+              </div>
             )}
           </div>
 
