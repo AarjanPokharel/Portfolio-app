@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Profile } from "@/lib/api";
 import { GitHubIcon, LinkedInIcon, EmailIcon, InstagramIcon } from "./Icons";
+import BackToTop from "./BackToTop";
 
 type FooterProps = {
   profile?: Profile | null;
@@ -144,9 +145,10 @@ export default function Footer({ profile }: FooterProps) {
           </div>
         </div>
 
-        {/* ── Copyright ────────────────────────────────────────── */}
-        <div className="mt-10 border-t border-line pt-6 text-center text-sm text-faint">
-          © {new Date().getFullYear()} {name}. All rights reserved.
+        {/* ── Copyright + back to top ──────────────────────────── */}
+        <div className="mt-10 flex flex-col items-center gap-4 border-t border-line pt-6 text-sm text-faint sm:flex-row sm:justify-between">
+          <p>© {new Date().getFullYear()} {name}. All rights reserved.</p>
+          <BackToTop />
         </div>
       </div>
     </footer>
