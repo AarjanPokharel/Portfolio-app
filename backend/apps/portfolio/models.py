@@ -1,7 +1,35 @@
 
+import os
+from io import BytesIO
+
+from django.core.files.base import ContentFile
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.text import slugify
+
+# Enable HEIC/HEIF support in Pillow (iPhone photos)
+from PIL import Image
+import pillow_heif
+
+pillow_heif.register_heif_opener()
+
+
+def convert_heic_to_jpeg(image_field):
+    """If the uploaded file is HEIC/HEIF, convert it to JPEG in place.
+    Returns True if a conversion happened."""
+    name = (image_field.name or "").lower()
+    if not name.endswith((".heic", ".heif")):
+        return False
+
+    img = Image.open(image_field)
+    img = img.convert("RGB")
+    buffer = BytesIO()
+    img.save(buffer, format="JPEG", quality=90)
+
+    new_name = os.path.splitext(image_field.name)[0] + ".jpg"
+    image_field.save(new_name, ContentFile(buffer.getvalue()), save=False)
+    return True
+
 
 # Create your models here.
 
@@ -250,6 +278,12 @@ class AboutPhoto(models.Model):
 
     class Meta:
         ordering = ['display_order']
+
+    def save(self, *args, **kwargs):
+        # iPhone HEIC uploads → JPEG so browsers can display them
+        if self.image:
+            convert_heic_to_jpeg(self.image)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.caption or f'About photo #{self.pk}'
