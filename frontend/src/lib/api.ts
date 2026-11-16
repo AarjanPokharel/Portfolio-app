@@ -133,23 +133,10 @@ export type ContactMessagePayload = {
 };
 
 
-// async function fetchFromApi<T>(endpoint: string): Promise<T> {
-//   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-//     cache: 'no-store',
-//   });
-
-//   if (!response.ok) {
-//     throw new Error(
-//       `API request failed: ${response.status} ${response.statusText}`
-//     );
-//   }
-
-//   return response.json();
-// }
 async function fetchFromApi<T>(endpoint: string): Promise<T> {
-  // No cache option: each build fetches fresh data once and bakes it into the page
+  // Next.js caches these answers in .next/cache between builds,
+  // so always build clean (rm -rf .next out) to get fresh content.  
   const response = await fetch(`${API_BASE_URL}${endpoint}`);
-
   if (!response.ok) {
     throw new Error(
       `API request failed: ${response.status} ${response.statusText}`
