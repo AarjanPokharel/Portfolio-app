@@ -141,10 +141,22 @@ export type ContactMessageResponse = {
   created_at: string;
 };
 
+// async function fetchFromApi<T>(endpoint: string): Promise<T> {
+//   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+//     cache: 'no-store',
+//   });
+
+//   if (!response.ok) {
+//     throw new Error(
+//       `API request failed: ${response.status} ${response.statusText}`
+//     );
+//   }
+
+//   return response.json();
+// }
 async function fetchFromApi<T>(endpoint: string): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-    cache: 'no-store',
-  });
+  // No cache option: each build fetches fresh data once and bakes it into the page
+  const response = await fetch(`${API_BASE_URL}${endpoint}`);
 
   if (!response.ok) {
     throw new Error(
@@ -152,7 +164,10 @@ async function fetchFromApi<T>(endpoint: string): Promise<T> {
     );
   }
 
-  return response.json();
+  // Django returns full photo links (http://localhost:8000/media/...).
+  // Make them relative (/media/...) so they work on whatever host serves the site.
+  const text = await response.text();
+  return JSON.parse(text.replaceAll(`${API_BASE_URL}/media/`, "/media/"));
 }
 
 export async function getProfile(): Promise<Profile | null> {

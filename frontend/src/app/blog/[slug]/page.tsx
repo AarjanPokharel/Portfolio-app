@@ -1,13 +1,30 @@
 // SLUG PAGE
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { formatDisplayDate, getBlogPost } from "@/lib/api";
+// import { formatDisplayDate, getBlogPost } from "@/lib/api";
+import { formatDisplayDate, getBlogPost, getBlogPosts } from "@/lib/api";
 
 type BlogDetailPageProps = {
   params: Promise<{
     slug: string;
   }>;
 };
+
+// A static site can't build pages on request, so list every post up front
+export const dynamicParams = false;
+
+// export async function generateStaticParams() {
+//   const posts = await getBlogPosts();
+//   return posts.map((post) => ({ slug: post.slug }));
+// }
+
+export async function generateStaticParams() {
+  const posts = await getBlogPosts();
+  // A static export needs at least one page per [slug] route.
+  // With no posts yet, build one placeholder that renders the 404 page.
+  if (posts.length === 0) return [{ slug: "coming-soon" }];
+  return posts.map((post) => ({ slug: post.slug }));
+}
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { slug } = await params;
