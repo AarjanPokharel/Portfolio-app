@@ -33,7 +33,9 @@ export default function ContactPage() {
 
             <div className="rounded-3xl border border-line bg-surface/70 p-6">
               <h2 className="text-xl font-semibold text-content">
-                Coming later
+                How this works
+                Your message goes straight to my inbox through a small
+                AWS Lambda function and Amazon SES. No database, no server.
               </h2>
 
               <p className="mt-3 leading-7 text-muted">

@@ -125,21 +125,13 @@ export type BlogPostDetail = {
 
 export type ContactMessagePayload = {
   message_type: string;
+  website: string; // honeypot: hidden from people, bots fill it in
   name: string;
   email: string;
   subject: string;
   message: string;
 };
 
-export type ContactMessageResponse = {
-  id: number;
-  message_type: string;
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-  created_at: string;
-};
 
 // async function fetchFromApi<T>(endpoint: string): Promise<T> {
 //   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
@@ -223,27 +215,26 @@ export async function getAboutPhotos(): Promise<AboutPhoto[]> {
   return fetchFromApi<AboutPhoto[]>('/api/portfolio/about-photos/');
 }
 
+// Baked in at build time from: terraform output -raw contact_url
+const CONTACT_URL = process.env.NEXT_PUBLIC_CONTACT_URL;
+
 export async function sendContactMessage(
   payload: ContactMessagePayload
-): Promise<ContactMessageResponse> {
-  const response = await fetch(`${API_BASE_URL}/api/contact/messages/`, {
+): Promise<void> {
+  if (!CONTACT_URL) {
+    throw new Error("The contact form isn't configured yet.");
+  }
+
+  const response = await fetch(CONTACT_URL, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => null);
-    throw new Error(
-      errorData?.message ||
-        errorData?.detail ||
-        "Failed to send contact message."
-    );
+    throw new Error(errorData?.message || "Failed to send your message.");
   }
-
-  return response.json();
 }
 
 export function formatDisplayDate(dateString: string | null): string {

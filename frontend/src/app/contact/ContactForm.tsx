@@ -30,6 +30,7 @@ export default function ContactForm({
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState(defaultSubject);
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -49,10 +50,11 @@ export default function ContactForm({
         email,
         subject,
         message,
+        website,
+      
       });
 
-      setSuccessMessage("Thanks! Your message has been saved. I’ll review it and respond soon.");
-      setMessageType(defaultMessageType);
+      setSuccessMessage("Thanks! Your message has been sent. I'll get back to you soon.");      setMessageType(defaultMessageType);
       setName("");
       setEmail("");
       setSubject(defaultSubject);
@@ -146,6 +148,20 @@ export default function ContactForm({
           className={inputClass}
           placeholder="Write your message here..."
         />
+      </div>
+
+      {/* Honeypot: moved off-screen so people never see it; bots fill every field */}
+      <div aria-hidden="true" style={{ position: "absolute", left: "-10000px" }}>
+        <label>
+          Website
+          <input
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={website}
+            onChange={(event) => setWebsite(event.target.value)}
+          />
+        </label>
       </div>
 
       {successMessage && (
