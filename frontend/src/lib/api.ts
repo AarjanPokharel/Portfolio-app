@@ -234,5 +234,17 @@ export function formatDisplayDate(dateString: string | null): string {
     month: "short",
     day: "numeric",
     year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+export function formatMonthYear(dateString: string | null): string {
+  if (!dateString) {
+    return "Present";
+  }
+  return new Date(dateString).toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
   });
 }

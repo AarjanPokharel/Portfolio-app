@@ -10,6 +10,7 @@ import AboutGallery from "@/components/AboutGallery";
 import { GitHubIcon, LinkedInIcon, EmailIcon, ArrowDownIcon, ExternalLinkIcon, RoleIcon } from "@/components/Icons";
 import {
   formatDisplayDate,
+  formatMonthYear,
   getBlogPosts,
   getEducation,
   getExperience,
@@ -82,7 +83,7 @@ export default async function Home() {
     title: item.job_title,
     subtitle: item.company_name,
     location: item.location,
-    meta: `${formatDisplayDate(item.start_date)} – ${item.currently_working ? "Present" : formatDisplayDate(item.end_date)}`,
+    meta: `${formatMonthYear(item.start_date)} - ${item.currently_working ? "Present" : formatMonthYear(item.end_date)}`,
     description: item.description,
   }));
 
@@ -91,7 +92,7 @@ export default async function Home() {
     title: item.school_name,
     subtitle: `${item.degree}${item.field_of_study ? `, ${item.field_of_study}` : ""}`,
     location: item.location,
-    meta: `${formatDisplayDate(item.start_date)} – ${formatDisplayDate(item.end_date)}`,
+    meta: `${formatMonthYear(item.start_date)} - ${formatMonthYear(item.end_date)}`,
     description: item.description,
   }));
 
