@@ -77,12 +77,12 @@ class ExperienceSerializer(serializers.ModelSerializer):
 
 
 class SkillSerializer(serializers.ModelSerializer):
-    label = serializers.CharField(source='get_category_display', read_only=True)
+    label = serializers.CharField(source='category', read_only=True)
     items_list = serializers.SerializerMethodField()
 
     class Meta:
         model = Skill
-        fields = ['id', 'category', 'label', 'items_list', 'display_order']
+        fields = ['id', 'category', 'icon', 'label', 'items_list', 'display_order']
 
     def get_items_list(self, obj):
         return [line.strip() for line in obj.items.splitlines() if line.strip()]

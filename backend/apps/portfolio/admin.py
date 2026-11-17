@@ -22,8 +22,8 @@ class ExperienceAdmin(admin.ModelAdmin):
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
-    list_display = ('category', 'display_order')
-    list_editable = ('display_order',)
+    list_display = ('category', 'icon', 'display_order')
+    list_editable = ('icon', 'display_order')
     ordering = ('display_order',)
 
 

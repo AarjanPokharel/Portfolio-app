@@ -119,20 +119,6 @@ export function WrenchIcon({ className }: { className?: string }) {
   );
 }
 
-// ─── Skill category icon resolver ────────────────────────────────────────────
-
-export function SkillIcon({ category, className }: { category: string; className?: string }) {
-  const c = category.toLowerCase();
-  if (c.includes("cloud")) return <CloudIcon className={className} />;
-  if (c.includes("devops")) return <GearIcon className={className} />;
-  if (c.includes("backend")) return <ServerIcon className={className} />;
-  if (c.includes("database")) return <DatabaseIcon className={className} />;
-  if (c.includes("security")) return <ShieldIcon className={className} />;
-  if (c.includes("network")) return <NetworkIcon className={className} />;
-  if (c.includes("programming")) return <CodeIcon className={className} />;
-  if (c.includes("tool")) return <WrenchIcon className={className} />;
-  return <CodeIcon className={className} />;
-}
 
 // ─── Role icon resolver ──────────────────────────────────────────────────────
 
@@ -148,7 +134,10 @@ export function RoleIcon({ icon, className }: { icon: string; className?: string
     case 'automation': return <AutomationIcon className={className} />;
     case 'security':   return <ShieldIcon className={className} />;
     case 'database':   return <DatabaseIcon className={className} />;
+    case 'network':    return <NetworkIcon className={className} />;
+    case 'tools':      return <WrenchIcon className={className} />;
     default:           return <CodeIcon className={className} />;
+
   }
 }
 

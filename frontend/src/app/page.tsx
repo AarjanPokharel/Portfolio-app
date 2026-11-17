@@ -1,13 +1,13 @@
 import Link from "next/link";
 import AnimatedHeroText from "@/components/AnimatedHeroText";
-import ArchitectureDiagram from "@/components/ArchitectureDiagram";
+// import ArchitectureDiagram from "@/components/ArchitectureDiagram";
 import ProjectSlider from "@/components/ProjectSlider";
 import InfoSlider from "@/components/InfoSlider";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import ContactForm from "@/app/contact/ContactForm";
 import AboutGallery from "@/components/AboutGallery";
-import { GitHubIcon, LinkedInIcon, EmailIcon, ArrowDownIcon, ExternalLinkIcon, SkillIcon } from "@/components/Icons";
+import { GitHubIcon, LinkedInIcon, EmailIcon, ArrowDownIcon, ExternalLinkIcon, RoleIcon } from "@/components/Icons";
 import {
   formatDisplayDate,
   getBlogPosts,
@@ -249,9 +249,9 @@ export default async function Home() {
             {displayedSkills.map((skill, i) => (
               <ScrollReveal key={skill.id} delay={i * 60}>
                 <div className="h-full rounded-2xl border border-line bg-surface p-5">
-                  <div className={`mb-3 flex items-center gap-2 ${getSkillColor(skill.category)}`}>
+                  <div className={`mb-3 flex items-center gap-2 ${getSkillColor(skill.icon)}`}>
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-current/10">
-                      <SkillIcon category={skill.category} className="h-4 w-4" />
+                      <RoleIcon icon={skill.icon} className="h-4 w-4" />
                     </span>
                     <p className="text-xs font-semibold uppercase tracking-widest">
                       {skill.label}
@@ -290,7 +290,7 @@ export default async function Home() {
             <div>
               <p className="text-sm uppercase tracking-widest text-accent-soft">About Me</p>
 
-              <p className="mt-5 text-justify leading-8 text-muted">
+              <p className="mt-5 whitespace-pre-line text-justify leading-8 text-muted">
                 {profile?.about_me ||
                   "I'm a Computer Science student who enjoys building things — from backend APIs and full-stack apps to cloud infrastructure and automation. I like understanding how systems work end to end."}
               </p>
@@ -416,12 +416,13 @@ export default async function Home() {
             <p className="text-sm uppercase tracking-widest text-accent-soft">Architecture</p>
             <h2 className="mt-4 text-3xl font-bold text-content">See how this project is built.</h2>
             {profile?.architecture_description && (
-              <p className="mt-3 text-justify leading-7 text-muted">{profile.architecture_description}</p>
+              <p className="mt-3 whitespace-pre-line text-justify leading-7 text-muted">{profile.architecture_description}</p>
             )}
             {/* Scrolls horizontally within the card on small screens instead of overflowing the page */}
             <div className="mt-5 -mx-2 overflow-x-auto px-2">
               <div className="min-w-[300px]">
-                <ArchitectureDiagram />
+                {/* Hidden until it's redrawn for S3 + CloudFront */}
+                {/* <ArchitectureDiagram /> */}
               </div>
             </div>
           </div>

@@ -13,6 +13,22 @@ import pillow_heif
 
 pillow_heif.register_heif_opener()
 
+ICON_CHOICES = [
+    ('aws',        'AWS'),
+    ('docker',     'Docker'),
+    ('python',     'Python'),
+    ('linux',      'Linux'),
+    ('devops',     'DevOps / Gear'),
+    ('backend',    'Backend / Server'),
+    ('cloud',      'Cloud'),
+    ('automation', 'Automation / Robot'),
+    ('security',   'Security / Shield'),
+    ('database',   'Database'),
+    ('network',    'Network'),
+    ('tools',      'Tools / Wrench'),
+    ('code',       'Code / Dev'),
+]
+
 
 def convert_heic_to_jpeg(image_field):
     """If the uploaded file is HEIC/HEIF, convert it to JPEG in place.
@@ -119,22 +135,16 @@ class Experience(models.Model):
 
 
 class Skill(models.Model):
-    CATEGORY_CHOICES = [
-        ('cloud',       'Cloud'),
-        ('devops',      'DevOps & CI/CD'),
-        ('backend',     'Backend'),
-        ('database',    'Databases'),
-        ('security',    'Security'),
-        ('networking',  'Networking'),
-        ('programming', 'Programming'),
-        ('tools',       'Tools'),
-    ]
-
     category = models.CharField(
         max_length=50,
-        choices=CATEGORY_CHOICES,
         unique=True,
-        help_text="One record per category."
+        help_text="The heading shown on the site, e.g. Data Science & ML."
+    )
+    icon = models.CharField(
+        max_length=20,
+        choices=ICON_CHOICES,
+        default='code',
+        help_text="Icon shown next to the heading."
     )
     items = models.TextField(
         default="",
@@ -147,7 +157,7 @@ class Skill(models.Model):
         ordering = ['display_order', 'category']
 
     def __str__(self):
-        return self.get_category_display()
+        return self.category
 
 
 class Project(models.Model):
@@ -193,20 +203,6 @@ class Project(models.Model):
 
 
 class Role(models.Model):
-    ICON_CHOICES = [
-        ('aws',        'AWS'),
-        ('docker',     'Docker'),
-        ('python',     'Python'),
-        ('linux',      'Linux'),
-        ('devops',     'DevOps / Gear'),
-        ('backend',    'Backend / Server'),
-        ('cloud',      'Cloud'),
-        ('automation', 'Automation / Robot'),
-        ('security',   'Security / Shield'),
-        ('database',   'Database'),
-        ('code',       'Code / Dev'),
-    ]
-
     text = models.CharField(
         max_length=200,
         help_text="Role label that gets typed out, e.g. 'Cloud & DevOps Engineer'"
