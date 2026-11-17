@@ -28,8 +28,9 @@ export default function AboutGallery({ photos, interval = 4000 }: Props) {
   if (photos.length === 0) return null;
 
   return (
-    <div className="group relative h-full min-h-[280px] overflow-hidden rounded-2xl border border-line bg-surface-2">
-      {/* Slides */}
+    <div className="group relative aspect-[4/5] w-full self-start overflow-hidden rounded-2xl border border-line bg-surface-2">
+   
+    {/* Slides */}
       {photos.map((photo, i) => (
         <div
           key={i}
