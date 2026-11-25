@@ -29,7 +29,8 @@ class SkillAdmin(admin.ModelAdmin):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('title', 'featured', 'created_at', 'updated_at')
+    list_display = ('title', 'featured', 'display_order', 'created_at')
+    list_editable = ('featured', 'display_order')
     list_filter = ('featured', 'created_at')
     search_fields = ('title', 'short_description', 'tech_stack')
     prepopulated_fields = {'slug': ('title',)}

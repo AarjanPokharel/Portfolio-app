@@ -186,12 +186,16 @@ class Project(models.Model):
     )
 
     featured = models.BooleanField(default=False)
+    display_order = models.PositiveIntegerField(
+        default=0,
+        help_text="Lower numbers show first. Ties fall back to newest first."
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-featured', '-created_at']
+        ordering = ['display_order', '-created_at']
 
     def save(self, *args, **kwargs):
         if not self.slug:
